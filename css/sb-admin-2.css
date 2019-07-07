@@ -2622,6 +2622,7 @@ fieldset:disabled a.btn {
   border-color: #4e73df;
 }
 
+
 .btn-primary:hover {
   color: #fff;
   background-color: #2e59d9;
@@ -11543,11 +11544,18 @@ a:focus {
   font-size: 1.35rem;
 }
 
+.btn-circle.btn-xl, .btn-group-xl > .btn-circle.btn {
+  height: 6rem;
+  width: 6rem;
+  font-size: 2.7rem;
+}
+
 .btn-circle.btn-jumbo, .btn-group-jumbo > .btn-circle.btn {
   height: 12rem;
   width: 12rem;
   font-size: 5.4rem;
 }
+
 
 .btn-icon-split {
   padding: 0;
