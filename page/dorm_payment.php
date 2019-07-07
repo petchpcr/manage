@@ -459,21 +459,21 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> 
           
-              <div class="card-body text-right">
-                <div class="row">
-                  <div class="col-lg-none col-sm-12 mb-2">
-                      <button type="button" class="btn btn-outline-warning mr-4"><i class="fas fa-print mr-2"></i>พิมพ์ที่เลือก</button>
-                  </div>
-                  <div class="col-lg-none col-sm-12 mb-2">
-                      <button type="button" class="btn btn-outline-warning mr-4"><i class="fas fa-print mr-2"></i>พิมพ์รายงาน</button>
-                  </div>
-                  <div class="col-lg-none col-sm-12 mb-2">
-                      <button type="button" class="btn btn-outline-warning mr-4"><i class="fas fa-print mr-2"></i>ออกรายงานสถิติการชำระเงิน</button>
-                  </div>
+            <div class="card-body text-right">
+              <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-5 mb-3">
+                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-print mr-2"></i>พิมพ์ที่เลือก</button>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-3 mb-4">
+                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-print mr-2"></i>พิมพ์รายงาน</button>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 mb-4">
+                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-print mr-2"></i>ออกรายงานสถิติการชำระเงิน</button>
                 </div>
               </div>
+            </div>
 
           </div>
         </div>    
