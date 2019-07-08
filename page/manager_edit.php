@@ -20,10 +20,274 @@
 <body class="bg-light">
 
     <div class="container">
+<<<<<<< HEAD
         
 
     </div>
 </div>
+=======
+      <div class="row m-3">
+        <div class="col-lg-4 col-md-12 mb-2">
+          <img class="img-thumbnail " src="../img/dorm.jpg" style="width: auto" alt="Responsive image">
+        </div>
+        <div class="col-lg-8 col-md-12 mb-2">
+          <p>รหัสหอพัก : </p>
+          <p>ชื่อหอพัก : </p>
+          <p>รายละเอียดหอพัก : </p>
+          <p>วันที่เพิ่มข้อมูล : </p>
+          
+        </div>
+      </div>
+      
+            
+            <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3 text-right">
+               <div class="row">
+                  <div class="col-6 text-left d-flex align-items-center">
+                        <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>ตารางข้อมูลห้องพัก</h6>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
+                    </div>
+                 </div>
+  
+                </div>
+            <div class="card-body">
+              <div class="table-responsive">
+              
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>รหัสห้องพัก</th>
+                      <th>ชื่อห้องพัก</th>
+                      <th>รหัสหอพัก</th>
+                      <th>รายละเอียดห้องพัก</th>
+                      <th>สถานะ</th>
+                      <th>แก้ไข</th>
+                      <th>ลบ</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>88888888888888</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th class="text-center"><i class="fas fa-edit"></i></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+>>>>>>> d75e4044619049ee899f9acce1f4bebc0b4209a5
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
