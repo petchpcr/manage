@@ -20,12 +20,6 @@
 <body class="bg-light">
 
     <div class="container">
-<<<<<<< HEAD
-        
-
-    </div>
-</div>
-=======
       <div class="row m-3">
         <div class="col-lg-4 col-md-12 mb-2">
           <img class="img-thumbnail " src="../img/dorm.jpg" style="width: auto" alt="Responsive image">
