@@ -49,6 +49,7 @@
                     <tr>
                       <th>รหัสครุภัณฑ์</th>
                       <th>ชื่อครุภัณฑ์</th>
+                      <th>จำนวนครุภัณฑ์</th>
                       <th>หมวดหมู่</th>
                       <th>รหัสอาคาร</th>
                       <th>รหัสห้อง</th>
@@ -60,6 +61,7 @@
                   </thead>
                   <tfoot>
                     <tr>
+                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
@@ -80,32 +82,12 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
                     <tr>
                       <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
@@ -124,16 +106,6 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
@@ -146,20 +118,12 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
                     <tr>
+                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
@@ -189,16 +153,6 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
@@ -222,32 +176,12 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
                     <tr>
                       <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
@@ -266,16 +200,6 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
@@ -288,6 +212,19 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
@@ -299,10 +236,96 @@
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
+                      <th>11111111111111</th>
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
                     <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th>11111111111111</th>
+                      <th><center><i class="fas fa-edit"></i></center></th>
+                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                    </tr>
+                    <tr>
+                      <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>
                       <th>11111111111111</th>

@@ -54,10 +54,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>รหัสอาคาร</th>
-                      <th>ชื่ออาคาร</th>
-                      <th>รายละเอียดอาคาร</th>
-                      <th>รูปอาคาร</th>
+                      <th>รหัสห้อง</th>
+                      <th>ชื่อห้อง</th>
+                      <th>ประเภทห้อง</th>
+                      <th>รายละเอียดห้อง</th>
                       <th>วันที่เพิ่มข้อมูล</th>
                       <th>แก้ไข</th>
                       <th>ลบ</th>
