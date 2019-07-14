@@ -42,30 +42,27 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-        <div class="col text-center" style="display: block">
-          <div class="btn btn-warning btn-circle btn-xl shadow-lg m-4 ">
-            <i class="fas fa-user-graduate"></i>
+          <div class="col text-center" style="display: block">
+            <div class="btn btn-warning btn-circle btn-xl shadow-lg m-4 ">
+              <i class="fas fa-user-graduate"></i>
+            </div>
           </div>
-        </div>
-        <h1 class="text-center h3 mb-4">จัดการข้อมูลนักศึกษา</h1>
+          <h1 class="text-center h3 mb-4">จัดการข้อมูลนักศึกษา</h1>
             
             <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 text-right">
-               <div class="row">
-                  <div class="col-6 text-left d-flex align-items-center">
-                        <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>DataTables Student</h6>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
-                    </div>
-                 </div>
-  
+              <div class="row">
+                <div class="col-6 text-left d-flex align-items-center">
+                    <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>DataTables Student</h6>
                 </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <div class="table-responsive">
-              
-
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -200,271 +197,12 @@
                       <th><center><i class="fas fa-edit"></i></center></th>
                       <th><center><i class="fas fa-trash-alt"></i></center></th>
                     </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-
         </div>
-    </div>
-      </div>
         <!-- /.container-fluid -->
 
       </div>
