@@ -123,14 +123,17 @@
               <div class="form-group row">
                 <p class="col-lg-3 col-md-12 col-form-label">ที่อยู่ : </p>
                 <div class="col-lg-9 col-md-12">
-                <textarea class="form-control" aria-label="With textarea"></textarea>
+                  <textarea class="form-control" aria-label="With textarea" rows="5"></textarea>
                 </div>
               </div>
 
-                <div class="col-lg-6 col-md-12 text-right m-5">
-                  <button type="submit" class="btn btn-outline-success">Save</button>
-                  <button type="reset" class="btn btn-outline-danger">Cancel</button>
+              <div class="form-group row">
+                <p class="col-lg-3 col-md-12 col-form-label"></p>
+                <div class="col-lg-9 col-md-12 d-flex justify-content-center">
+                  <button type="submit" class="btn btn-outline-success mx-3">Save</button>
+                  <button type="reset" class="btn btn-outline-danger mx-3">Cancel</button>
                 </div>
+              </div>
               
 
             </div>
