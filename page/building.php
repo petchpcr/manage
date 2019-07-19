@@ -13,7 +13,11 @@
 
   <!-- CSS Script-->
   <?php require_once 'script_css.php';?>
-
+  <script>
+    $(document).ready(function (e) {
+      $("#AddModal").modal("show");
+    });
+  </script>
 </head>
 
 <body id="page-top">
@@ -44,7 +48,7 @@
           </div>
           <h1 class="text-center text-truncate h3 mb-4">จัดการข้อมูลอาคาร</h1>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -59,7 +63,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -74,7 +78,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -89,7 +93,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -104,7 +108,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -119,7 +123,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -134,7 +138,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -149,7 +153,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -164,7 +168,7 @@
             </div>
           </button>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
+          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
               <div class="col-md-3 col-sm-12">
@@ -178,22 +182,6 @@
               </div>
             </div>
           </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-        </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -217,7 +205,7 @@
   
   <!-- Scroll to Top Button-->
   <div class="fix-btn">
-    <button type="button" class="btn btn-block btn-success p-3">
+    <button type="button" class="btn btn-block btn-success p-3" data-toggle="modal" data-target="#AddModal">
       <i class="fas fa-plus mr-1"></i>เพิ่ม
     </button>
   </div>
@@ -229,6 +217,46 @@
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
 
+  <div class="modal fade bd-example-modal-lg" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus mr-2"></i>เพิ่มอาคารใหม่</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group px-4">
+            <div class="text-center mb-3">
+              <!-- <img src="../img/Building/B01.jpg" class="img_add border"> -->
+              <img src="../img/Building/Default.png" class="img_add">
+            </div>
+
+            <label>รูปภาพอาคาร</label>
+            <div class="custom-file">
+            <input type="file" class="file-input">
+            <label class="file-label" for="validatedCustomFile">Choose file...</label>
+            <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+            </div>
+
+            <label class="mt-3">ชื่ออาคาร</label>
+            <input type="email" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
+            <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
+            
+            <label>รายละเอียดอาคาร</label>
+            <textarea class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
+            <button class="btn btn-success btn-user">ตกลง</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- JS Script-->
   <?php require_once 'script_js.php';?>
 
