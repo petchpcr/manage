@@ -43,9 +43,142 @@
             </div>
           </div>
           <h1 class="text-center text-truncate h3 mb-4">จัดการข้อมูลอาคาร</h1>
-          <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-warning mb-2"><i class="fas fa-plus mr-2"></i>Add</button>
-          </div>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="btn btn-block btn-outline-warning shadow">
+            <div class="row">
+              <div class="col-md-3 col-sm-none"></div>
+              <div class="col-md-3 col-sm-12">
+                <img class="img_list" src="../img/building/B01.jpg">
+              </div>
+              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                <div class="row w-100 m-0">
+                  <div class="col-list-text list-head">Building 01</div>
+                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                </div>
+              </div>
+            </div>
+          </button>
+
           <button type="button" class="btn btn-block btn-outline-warning shadow">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
@@ -81,12 +214,18 @@
 
   </div>
   <!-- End of Page Wrapper -->
-
+  
   <!-- Scroll to Top Button-->
+  <div class="fix-btn">
+    <button type="button" class="btn btn-block btn-success p-3">
+      <i class="fas fa-plus mr-1"></i>เพิ่ม
+    </button>
+  </div>
+
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
+  
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
 

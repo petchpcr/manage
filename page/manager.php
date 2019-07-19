@@ -325,11 +325,8 @@
           </div>
 
         </div>
-<<<<<<< HEAD
       </div>
       </div>
-=======
->>>>>>> 9a287626bb7416a024bca8c95041bfc3857abe57
         <!-- /.container-fluid -->
 
       </div>

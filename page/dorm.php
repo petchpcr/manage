@@ -42,10 +42,8 @@
               <i class="fas fa-home"></i>
             </div>
           </div>
-          <h1 class="text-center text-truncate h3 p-0">จัดการข้อมูลหอพัก</h1>
-          <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-warning mb-2"><i class="fas fa-plus mr-2"></i>Add</button>
-          </div>
+          <h1 class="text-center text-truncate h3 mb-4">จัดการข้อมูลหอพัก</h1>
+          
           <button type="button" class="btn btn-block btn-outline-warning shadow ">
             <div class="row">
               <div class="col-md-3 col-sm-none"></div>
@@ -83,6 +81,12 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
+  <div class="fix-btn">
+    <button type="button" class="btn btn-block btn-success p-3">
+      <i class="fas fa-plus mr-1"></i>เพิ่ม
+    </button>
+  </div>
+
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
