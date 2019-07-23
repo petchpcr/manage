@@ -9,14 +9,127 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>Building</title>
 
   <!-- CSS Script-->
   <?php require_once 'script_css.php';?>
+
   <script>
     $(document).ready(function (e) {
-      $("#AddModal").modal("show");
+      LoadBuilding();
     });
+
+    function LoadBuilding(){
+      var Data = {
+        'STATUS': 'LoadBuilding'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function AddBuilding(){
+      var Name = $("#new_name").val();
+      var Detail = $("#new_detail").val();
+
+      if (Name == "" || Detail == "") {
+        var Title = 'ไม่สามรถเพิ่มข้อมูลได้';
+        var Text = "โปรดตรวจสอบ ชื่อ และ รายละเอียด ของอาคาร !";
+        var Type = 'warning';
+        AlertError(Title,Text,Type);
+
+      } else {
+        var Data = {
+          'Name': Name,
+          'Detail': Detail,
+          'STATUS': 'AddBuilding'
+        };
+        senddata(JSON.stringify(Data));
+      }
+    }
+
+    function AlertError(Title,Text,Type){
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+    }
+
+    function senddata(Data) {
+      var form_data = new FormData();
+      form_data.append("DATA", Data);
+      var URL = '../process/building.php';
+      $.ajax({
+        url: URL,
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function (result) {
+          try {
+            var temp = $.parseJSON(result);
+          } catch (e) {
+            console.log('Error#542-decode error');
+          }
+
+          if (temp["status"] == 'success') {
+            if(temp["form"] == 'LoadBuilding'){
+              $("#show_building").empty();
+              var count = temp['count'];
+
+              if (count == 0) {
+                Title = "ข้อมูลว่างเปล่า";
+                Text = "ยังไม่มีข้อมูลอาคาร !";
+                Type = "info";
+                AlertError(Title,Text,Type);
+
+              } else {
+                for (var i = 0; i < count; i++) {
+                  var Num = i+1;
+                  var Picture = temp[i]['Picture'];
+                  if (temp[i]['Picture'] == null || temp[i]['Picture'] == "") {
+                    Picture = "B01.jpg";
+                  }
+                  var Str = "<button type='button' id='B"+Num+"' class='btn btn-block btn-outline-warning shadow mb-3' data-BuildingID='"+temp[i]['BuildingID']+"'>";
+                      Str += "<div class='row'><div class='col-md-3 col-sm-none'></div><div class='col-md-3 col-sm-12'><img class='img_list' src='../img/building/"+Picture+"'>";
+                      Str += "</div><div class='col-md-6 col-sm-12 d-flex align-items-center p-0'><div class='row w-100 m-0'><div class='col-list-text list-head'>"+temp[i]['BuildingID']+"</div>";
+                      Str += "<div class='col-list-text list-text'>"+temp[i]['BuildingName']+"</div></div></div></div></button>";
+
+                  $("#show_building").append(Str);
+                }
+              }
+            }
+            else if(temp["form"] == 'AddBuilding'){
+              LoadBuilding();
+            }
+            else if(temp["form"] == 'logout'){
+                window.location.href='login.html';
+            }
+
+          } else if (temp['status'] == "failed") {
+              var Title = "";
+              var Text = "";
+              var Type = "error";
+            if(temp["form"] == 'LoadBuilding'){
+              Title = "การเรียกดูข้อมูลผิดพลาด";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'AddBuilding'){
+              Title = "การเพิ่มข้อมูลผิดพลาด";
+              AlertError(Title,Text,Type);
+            }
+            
+          } else if (temp['status'] == "error") {
+              alert("$_POST is NULL");
+          }
+        }
+      });
+    }
+
   </script>
 </head>
 
@@ -48,140 +161,24 @@
           </div>
           <h1 class="text-center text-truncate h3 mb-4">จัดการข้อมูลอาคาร</h1>
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
+          <div id="show_building">
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
+            <!-- <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
+              <div class="row">
+                <div class="col-md-3 col-sm-none"></div>
+                <div class="col-md-3 col-sm-12">
+                  <img class="img_list" src="../img/building/B01.jpg">
+                </div>
+                <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
+                  <div class="row w-100 m-0">
+                    <div class="col-list-text list-head">Building 01</div>
+                    <div class="col-list-text list-text">ตึกอำนวยการ</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </button>
+            </button> -->
 
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button type="button" class="btn btn-block btn-outline-warning shadow mb-3">
-            <div class="row">
-              <div class="col-md-3 col-sm-none"></div>
-              <div class="col-md-3 col-sm-12">
-                <img class="img_list" src="../img/building/B01.jpg">
-              </div>
-              <div class="col-md-6 col-sm-12 d-flex align-items-center p-0">
-                <div class="row w-100 m-0">
-                  <div class="col-list-text list-head">Building 01</div>
-                  <div class="col-list-text list-text">ตึกอำนวยการ</div>
-                </div>
-              </div>
-            </div>
-          </button>
+          </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -205,7 +202,7 @@
   
   <!-- Scroll to Top Button-->
   <div class="fix-btn">
-    <button type="button" class="btn btn-block btn-success p-3" data-toggle="modal" data-target="#AddModal">
+    <button type="button" class="btn btn-block btn-success p-3" data-toggle="modal" data-target="#md_add_building">
       <i class="fas fa-plus mr-1"></i>เพิ่ม
     </button>
   </div>
@@ -217,7 +214,7 @@
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
 
-  <div class="modal fade bd-example-modal-lg" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="md_add_building" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -236,27 +233,28 @@
 
             <label>รูปภาพอาคาร</label>
             <div class="custom-file">
-            <input type="file" class="file-input">
-            <label class="file-label" for="validatedCustomFile">Choose file...</label>
-            <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+              <input type="file" class="file-input">
+              <label class="file-label" for="validatedCustomFile">Choose file...</label>
+              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
             </div>
 
             <label class="mt-3">ชื่ออาคาร</label>
-            <input type="email" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
+            <input type="text" id="new_name" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
             <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
             
             <label>รายละเอียดอาคาร</label>
-            <textarea class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
+            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
           </div>
 
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
-            <button class="btn btn-success btn-user">ตกลง</button>
+            <button onclick="AddBuilding()" class="btn btn-success btn-user" data-dismiss="modal">ตกลง</button>
         </div>
       </div>
     </div>
   </div>
+  
   <!-- JS Script-->
   <?php require_once 'script_js.php';?>
 
