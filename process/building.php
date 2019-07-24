@@ -4,7 +4,7 @@
 
     function LoadBuilding($conn){
         $count = 0;
-        $boolean = true;
+        $boolean = false;
 
         $Sql = "SELECT BuildingID,BuildingName,Picture
                 FROM tb_building";
@@ -80,8 +80,8 @@
         else if ($DATA['STATUS'] == 'AddBuilding') {
             AddBuilding($conn, $DATA);
         }
-        else if ($DATA['STATUS'] == 'logout') {
-            logout($conn, $DATA);
+        else if ($DATA['STATUS'] == 'Logout') {
+            Logout($conn, $DATA);
         }
     }else {
         $return['status'] = "error";

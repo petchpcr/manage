@@ -43,7 +43,14 @@
           'STATUS': 'AddBuilding'
         };
         senddata(JSON.stringify(Data));
+        $("#md_add_building").modal("hide");
       }
+    }
+
+    function To_BuildingRoom(BuildID){
+      var GET = '?BuildID='+BuildID;
+          // GET += '&BuildID2=555';
+      window.location.href = 'building_room.php'+GET;
     }
 
     function AlertError(Title,Text,Type){
@@ -94,10 +101,10 @@
                   if (temp[i]['Picture'] == null || temp[i]['Picture'] == "") {
                     Picture = "B01.jpg";
                   }
-                  var Str = "<button type='button' id='B"+Num+"' class='btn btn-block btn-outline-warning shadow mb-3' data-BuildingID='"+temp[i]['BuildingID']+"'>";
+                  var Str = "<button onclick='To_BuildingRoom(\""+temp[i]['BuildingID']+"\")' type='button' id='B"+Num+"' class='btn btn-block btn-outline-warning shadow mb-3' data-BuildingID='"+temp[i]['BuildingID']+"'>";
                       Str += "<div class='row'><div class='col-md-3 col-sm-none'></div><div class='col-md-3 col-sm-12'><img class='img_list' src='../img/building/"+Picture+"'>";
                       Str += "</div><div class='col-md-6 col-sm-12 d-flex align-items-center p-0'><div class='row w-100 m-0'><div class='col-list-text list-head'>"+temp[i]['BuildingID']+"</div>";
-                      Str += "<div class='col-list-text list-text'>"+temp[i]['BuildingName']+"</div></div></div></div></button>";
+                      Str += "<div class='col-list-text list-text'>"+temp[i]['BuildingName']+"</div></div></div></div></button></form>";
 
                   $("#show_building").append(Str);
                 }
@@ -106,20 +113,20 @@
             else if(temp["form"] == 'AddBuilding'){
               LoadBuilding();
             }
-            else if(temp["form"] == 'logout'){
+            else if(temp["form"] == 'Logout'){
                 window.location.href='login.html';
             }
 
           } else if (temp['status'] == "failed") {
-              var Title = "";
+              var Title = "พบข้อผิดพลาด";
               var Text = "";
               var Type = "error";
             if(temp["form"] == 'LoadBuilding'){
-              Title = "การเรียกดูข้อมูลผิดพลาด";
+              Text = "การเรียกดูข้อมูลอาคารเกิดปัญหา";
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'AddBuilding'){
-              Title = "การเพิ่มข้อมูลผิดพลาด";
+              Text = "การเพิ่มข้อมูลอาคารเกิดปัญหา";
               AlertError(Title,Text,Type);
             }
             
@@ -249,7 +256,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
-            <button onclick="AddBuilding()" class="btn btn-success btn-user" data-dismiss="modal">ตกลง</button>
+            <button onclick="AddBuilding()" class="btn btn-success btn-user">ตกลง</button>
         </div>
       </div>
     </div>

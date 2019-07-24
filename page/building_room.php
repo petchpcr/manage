@@ -1,3 +1,6 @@
+<?php
+    $BuildID = $_GET['BuildID'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +17,78 @@
   <!-- CSS Script-->
   <?php require_once 'script_css.php';?>
 
+  <script>
+    $(document).ready(function (e) {
+      var BuildID = '<?php echo $BuildID ?>';
+      LoadBuilding(BuildID);
+    });
+
+    function LoadBuilding(BuildID){
+      var Data = {
+        'BuildID': BuildID,
+        'STATUS': 'LoadBuilding'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function AlertError(Title,Text,Type){
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+    }
+
+    function senddata(Data) {
+      var form_data = new FormData();
+      form_data.append("DATA", Data);
+      var URL = '../process/building_room.php';
+      $.ajax({
+        url: URL,
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function (result) {
+          try {
+            var temp = $.parseJSON(result);
+          } catch (e) {
+            console.log('Error#542-decode error');
+          }
+
+          if (temp["status"] == 'success') {
+            if(temp["form"] == 'LoadBuilding'){
+              $("#show_build_id").append(temp['BuildingID']);
+              $("#show_build_name").append(temp['BuildingName']);
+              $("#show_build_detail").append(temp['Detail']);
+              $("#show_build_date").append(temp['Date']);
+              $("#show_build_img").attr("src","../img/Building/"+temp['Picture'])
+            }
+            else if(temp["form"] == 'logout'){
+                window.location.href='login.html';
+            }
+
+          } else if (temp['status'] == "failed") {
+              var Title = "พบข้อผิดพลาด";
+              var Text = "";
+              var Type = "error";
+            if(temp["form"] == 'LoadBuilding'){
+              Text = "เรียกดูอาคาร '"+temp['BuildID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            
+          } else if (temp['status'] == "error") {
+              alert("$_POST is NULL");
+          }
+        }
+      });
+    }
+  </script>
 </head>
 
 <body id="page-top">
@@ -39,13 +114,13 @@
         <div class="container-fluid">
           <div class="row m-3">
             <div class="col-lg-4 col-md-12 mb-2">
-              <img class="img-thumbnail " src="../img/Building.jpg" style="width: auto" alt="Responsive image">
+              <img id="show_build_img" class="img-thumbnail " style="width: auto" alt="Responsive image">
             </div>
             <div class="col-lg-8 col-md-12 mb-2">
-              <p>รหัสอาคาร : </p>
-              <p>ชื่ออาคาร : </p>
-              <p>รายละเอียดอาคาร : </p>
-              <p>วันที่เพิ่มข้อมูล : </p>
+              <p id="show_build_id">รหัสอาคาร : </p>
+              <p id="show_build_name">ชื่ออาคาร : </p>
+              <p id="show_build_detail">รายละเอียดอาคาร : </p>
+              <p id="show_build_date">วันที่เพิ่มข้อมูล : </p>
             </div>
           </div>
 
