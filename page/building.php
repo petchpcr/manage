@@ -17,7 +17,24 @@
   <script>
     $(document).ready(function (e) {
       LoadBuilding();
+      $('.dropify').dropify();
+
+      // $('#browse_file').change(function(e){
+      //     var fileName = e.target.files[0].name;
+      //     alert(fileName);
+      // });
     });
+
+    
+
+    // $("form#frm_add_build").submit(function(e) {
+    //     e.preventDefault();    
+    //     var formData = new FormData(this);
+
+    //     $.post($(this).attr("action"), formData, function(data) {
+    //         alert(data);
+    //     });
+    // });
 
     function LoadBuilding(){
       var Data = {
@@ -37,6 +54,22 @@
         AlertError(Title,Text,Type);
 
       } else {
+        // $('form#frm_add_build').hide();
+        // var form = $('form#frm_add_build').serializeArray();
+        // $.ajax({
+        //     url: '../process/building.php',
+        //     type: 'post',
+        //     data: {
+        //       'form' : form,
+        //       'STATUS' : 'Tester'
+        //       },
+        //     dataType: 'text',
+        //     success: function(result){
+        //       console.log(result);
+        //     }
+        // });
+
+        $("#btn_submit").click();
         var Data = {
           'Name': Name,
           'Detail': Detail,
@@ -230,34 +263,39 @@
             <span aria-hidden="true">×</span>
             </button>
         </div>
-        <div class="modal-body">
 
-          <div class="form-group px-4">
-            <div class="text-center mb-3">
-              <!-- <img src="../img/Building/B01.jpg" class="img_add border"> -->
-              <img src="../img/Building/Default.png" class="img_add">
+        <form id="frm_add_build" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="form-group px-4">
+              <!-- <div class="text-center mb-3">
+                <img id="img_browse" src="../img/Building/Default.png" class="img_add">
+              </div> -->
+
+              <label>รูปภาพอาคาร</label>
+              <div class="custom-file">
+                <!-- <input type="file" id="browse_file" class="file-input">
+                <label class="file-label" for="validatedCustomFile">Choose file...</label> -->
+                <input type="file" id="input-file-now" class="dropify" />
+                <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+              </div>
+
+              <label class="mt-3">ชื่ออาคาร</label>
+              <input type="text" id="new_name" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
+              <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
+              
+              <label>รายละเอียดอาคาร</label>
+              <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
             </div>
-
-            <label>รูปภาพอาคาร</label>
-            <div class="custom-file">
-              <input type="file" class="file-input">
-              <label class="file-label" for="validatedCustomFile">Choose file...</label>
-              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
-            </div>
-
-            <label class="mt-3">ชื่ออาคาร</label>
-            <input type="text" id="new_name" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
-            <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
-            
-            <label>รายละเอียดอาคาร</label>
-            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
           </div>
+          <Button type="submit" id="btn_submit" hidden></Button>
+        </form>
 
-        </div>
         <div class="modal-footer">
             <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
             <button onclick="AddBuilding()" class="btn btn-success btn-user">ตกลง</button>
         </div>
+
+
       </div>
     </div>
   </div>

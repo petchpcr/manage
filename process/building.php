@@ -37,7 +37,6 @@
     function AddBuilding($conn, $DATA){
         $Name = $DATA["Name"];
         $Detail = $DATA["Detail"];
-
         $Sql = "SELECT	CONCAT('B',LPAD(MAX(CONVERT(SUBSTRING(BuildingID,-2),UNSIGNED INTEGER))+1,2,0)) AS BuildingID
                 FROM tb_building";
 
@@ -70,6 +69,11 @@
         }
     }
 
+    function Tester($conn, $DATA){
+        echo json_encode("55521");
+
+    }
+
     if(isset($_POST['DATA'])){
         $data = $_POST['DATA'];
         $DATA = json_decode(str_replace('\"', '"', $data), true);
@@ -80,6 +84,9 @@
         else if ($DATA['STATUS'] == 'AddBuilding') {
             AddBuilding($conn, $DATA);
         }
+        else if ($DATA['STATUS'] == 'Tester') {
+            Tester($conn, $DATA);
+        }
         else if ($DATA['STATUS'] == 'Logout') {
             Logout($conn, $DATA);
         }
@@ -89,4 +96,5 @@
         mysqli_close($conn);
         die;
     }
+
 ?>

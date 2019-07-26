@@ -67,16 +67,17 @@
               $("#show_build_name").append(temp['BuildingName']);
               $("#show_build_detail").append(temp['Detail']);
               $("#show_build_date").append(temp['Date']);
-              $("#show_build_img").attr("src","../img/Building/"+temp['Picture'])
+              $("#show_build_img").attr("src","../img/Building/"+temp['Picture']);
             }
             else if(temp["form"] == 'logout'){
                 window.location.href='login.html';
             }
 
           } else if (temp['status'] == "failed") {
-              var Title = "พบข้อผิดพลาด";
-              var Text = "";
-              var Type = "error";
+            var Title = "พบข้อผิดพลาด";
+            var Text = "";
+            var Type = "error";
+            
             if(temp["form"] == 'LoadBuilding'){
               Text = "เรียกดูอาคาร '"+temp['BuildID']+"' เกิดปัญหา";
               AlertError(Title,Text,Type);

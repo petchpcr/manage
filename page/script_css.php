@@ -6,5 +6,6 @@
 <!-- Custom styles for this template-->
 <link href="../css/sb-admin-2.css" rel="stylesheet">
 <link href="../css/chomthong.css" rel="stylesheet">
+<link href="../css/dropify.min.css" rel="stylesheet">
 <link href="../css/sweetalert2.min.css" rel="stylesheet">
 <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
