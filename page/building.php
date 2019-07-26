@@ -48,9 +48,9 @@
       var Detail = $("#new_detail").val();
 
       if (Name == "" || Detail == "") {
-        var Title = 'ไม่สามรถเพิ่มข้อมูลได้';
+        var Title = "ไม่สามรถเพิ่มข้อมูลได้";
         var Text = "โปรดตรวจสอบ ชื่อ และ รายละเอียด ของอาคาร !";
-        var Type = 'warning';
+        var Type = "warning";
         AlertError(Title,Text,Type);
 
       } else {
@@ -69,7 +69,6 @@
         //     }
         // });
 
-        $("#btn_submit").click();
         var Data = {
           'Name': Name,
           'Detail': Detail,
@@ -132,12 +131,12 @@
                   var Num = i+1;
                   var Picture = temp[i]['Picture'];
                   if (temp[i]['Picture'] == null || temp[i]['Picture'] == "") {
-                    Picture = "B01.jpg";
+                    Picture = "Default.png";
                   }
                   var Str = "<button onclick='To_BuildingRoom(\""+temp[i]['BuildingID']+"\")' type='button' id='B"+Num+"' class='btn btn-block btn-outline-warning shadow mb-3' data-BuildingID='"+temp[i]['BuildingID']+"'>";
                       Str += "<div class='row'><div class='col-md-3 col-sm-none'></div><div class='col-md-3 col-sm-12'><img class='img_list' src='../img/building/"+Picture+"'>";
                       Str += "</div><div class='col-md-6 col-sm-12 d-flex align-items-center p-0'><div class='row w-100 m-0'><div class='col-list-text list-head'>"+temp[i]['BuildingID']+"</div>";
-                      Str += "<div class='col-list-text list-text'>"+temp[i]['BuildingName']+"</div></div></div></div></button></form>";
+                      Str += "<div class='col-list-text list-text'>"+temp[i]['Name']+"</div></div></div></div></button></form>";
 
                   $("#show_building").append(Str);
                 }
@@ -155,11 +154,13 @@
               var Text = "";
               var Type = "error";
             if(temp["form"] == 'LoadBuilding'){
-              Text = "การเรียกดูข้อมูลอาคารเกิดปัญหา";
+              Title = "ข้อมูลว่างเปล่า";
+              Text = "ยังไม่มีข้อมูลอาคาร !";
+              Type = "info";
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'AddBuilding'){
-              Text = "การเพิ่มข้อมูลอาคารเกิดปัญหา";
+              Text = "การเพิ่มข้อมูล '" + temp['Name'] + "' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
             
@@ -264,7 +265,7 @@
             </button>
         </div>
 
-        <form id="frm_add_build" method="post" enctype="multipart/form-data">
+        <form id="frm_add_build">
           <div class="modal-body">
             <div class="form-group px-4">
               <!-- <div class="text-center mb-3">
@@ -280,7 +281,7 @@
               </div>
 
               <label class="mt-3">ชื่ออาคาร</label>
-              <input type="text" id="new_name" class="form-control form-control-user" placeholder="กรอกชื่ออาคาร">
+              <input type="text" id="new_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่ออาคาร">
               <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
               
               <label>รายละเอียดอาคาร</label>
@@ -294,7 +295,6 @@
             <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
             <button onclick="AddBuilding()" class="btn btn-success btn-user">ตกลง</button>
         </div>
-
 
       </div>
     </div>

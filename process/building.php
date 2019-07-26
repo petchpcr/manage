@@ -6,13 +6,14 @@
         $count = 0;
         $boolean = false;
 
-        $Sql = "SELECT BuildingID,BuildingName,Picture
+        $Sql = "SELECT BuildingID,Name,Picture
                 FROM tb_building";
+        $return['Sql'] = $Sql;
 
         $meQuery = mysqli_query($conn, $Sql);
         while ($Result = mysqli_fetch_assoc($meQuery)) {
             $return[$count]['BuildingID'] = $Result['BuildingID'];
-            $return[$count]['BuildingName'] = $Result['BuildingName'];
+            $return[$count]['Name'] = $Result['Name'];
             $return[$count]['Picture'] = $Result['Picture'];
             $count++;
             $boolean = true;
@@ -44,14 +45,14 @@
         while ($Result = mysqli_fetch_assoc($meQuery)) {
             $NewID = $Result['BuildingID'];
         }
-        $return['NewID 1'] = $NewID;
+        $return['OldID'] = $NewID;
 
         if ($NewID == null) {
             $NewID = "B01";
         }
-        $return['NewID 2'] = $NewID;
+        $return['NewID'] = $NewID;
 
-        $Sql = "INSERT INTO	tb_building(BuildingID,BuildingName,Detail) VALUES ('$NewID','$Name','$Detail')";
+        $Sql = "INSERT INTO	tb_building(BuildingID,Name,Detail,Date) VALUES ('$NewID','$Name','$Detail',NOW())";
         $return['Sql'] = $Sql;
 
         if (mysqli_query($conn,$Sql)) {
@@ -61,17 +62,13 @@
             mysqli_close($conn);
             die;
         } else {
+            $return['Name'] = $Name;
             $return['status'] = "failed";
             $return['form'] = "AddBuilding";
             echo json_encode($return);
             mysqli_close($conn);
             die;
         }
-    }
-
-    function Tester($conn, $DATA){
-        echo json_encode("55521");
-
     }
 
     if(isset($_POST['DATA'])){
@@ -83,9 +80,6 @@
         }
         else if ($DATA['STATUS'] == 'AddBuilding') {
             AddBuilding($conn, $DATA);
-        }
-        else if ($DATA['STATUS'] == 'Tester') {
-            Tester($conn, $DATA);
         }
         else if ($DATA['STATUS'] == 'Logout') {
             Logout($conn, $DATA);
