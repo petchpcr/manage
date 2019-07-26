@@ -41,6 +41,11 @@
       senddata(JSON.stringify(Data));
     }
 
+    function ShowEmpty(){
+      var Str = "<tr class='odd'><td valign='top' colspan='6' class='dataTables_empty'>No data available in table</td></tr>";
+      $("#show_room").append(Str);
+    }
+
     function CallModal(Active){
       if (Active == "Add") {
         $("#new_id").val("");
@@ -198,15 +203,16 @@
               $("#show_build_img").attr("src","../img/Building/" + Picture);
             }
             else if(temp["form"] == 'LoadRoom'){
+              $("#show_room").empty();
               var count = temp['count'];
               if (count == 0) {
+                ShowEmpty();
                 Title = "ข้อมูลว่างเปล่า";
                 Text = "ยังไม่มีข้อมูลห้อง !";
                 Type = "info";
                 AlertError(Title,Text,Type);
               }
               else {
-                $("#show_room").empty();
                 for (var i = 0; i < count; i++) {
                   var Str = "<tr><td>"+temp[i]['RoomID']+"</td><td>"+temp[i]['Name']+"</td><td>"+temp[i]['Type']+"</td><td>"+temp[i]['Date']+"</td>";
                       Str += "<td class='py-1 px-2'><button onclick='ShowEditRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-warning'><i class='fas fa-edit'></i></button></td>";
@@ -248,7 +254,11 @@
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'LoadRoom'){
-              Text = "การเรียกดูข้อมูลห้องทั้งหมดเกิดปัญหา";
+              $("#show_room").empty();
+              ShowEmpty();
+              Title = "ข้อมูลว่างเปล่า";
+              Text = "ยังไม่มีข้อมูลห้อง !";
+              Type = "info";
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'AddRoom'){
