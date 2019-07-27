@@ -265,31 +265,25 @@
             </button>
         </div>
 
-        <form id="frm_add_build">
-          <div class="modal-body">
-            <div class="form-group px-4">
-              <!-- <div class="text-center mb-3">
-                <img id="img_browse" src="../img/Building/Default.png" class="img_add">
-              </div> -->
+        <div class="modal-body">
+          <div class="form-group px-4">
 
-              <label>รูปภาพอาคาร</label>
-              <div class="custom-file">
-                <!-- <input type="file" id="browse_file" class="file-input">
-                <label class="file-label" for="validatedCustomFile">Choose file...</label> -->
-                <input type="file" id="input-file-now" class="dropify" />
-                <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
-              </div>
-
-              <label class="mt-3">ชื่ออาคาร</label>
-              <input type="text" id="new_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่ออาคาร">
-              <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
-              
-              <label>รายละเอียดอาคาร</label>
-              <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
+            <label>รูปภาพอาคาร</label>
+            <div class="custom-file">
+              <!-- <input type="file" id="browse_file" class="file-input">
+              <label class="file-label" for="validatedCustomFile">Choose file...</label> -->
+              <input type="file" id="input-file-now" class="dropify" />
+              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
             </div>
+
+            <label class="mt-3">ชื่ออาคาร</label>
+            <input type="text" id="new_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่ออาคาร">
+            <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
+            
+            <label>รายละเอียดอาคาร</label>
+            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
           </div>
-          <Button type="submit" id="btn_submit" hidden></Button>
-        </form>
+        </div>
 
         <div class="modal-footer">
             <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>

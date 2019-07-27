@@ -213,12 +213,16 @@
                 AlertError(Title,Text,Type);
               }
               else {
+                table = $('#dataTable').DataTable(); // เรียกตาราง
+                table.destroy(); // ทำลายคุณสมบัติ
+                $("#show_room").empty();
                 for (var i = 0; i < count; i++) {
                   var Str = "<tr><td>"+temp[i]['RoomID']+"</td><td>"+temp[i]['Name']+"</td><td>"+temp[i]['Type']+"</td><td>"+temp[i]['Date']+"</td>";
                       Str += "<td class='py-1 px-2'><button onclick='ShowEditRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-warning'><i class='fas fa-edit'></i></button></td>";
                       Str += "<td class='py-1 px-2'><button onclick='DeleteRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-danger'><i class='fas fa-trash-alt'></i></button></td></tr>";
                   $("#show_room").append(Str);
                 }
+                table = $('#dataTable').DataTable(); // สร้างคุณสมบัติใหม่
               }
             }
             else if(temp["form"] == 'AddRoom'){
