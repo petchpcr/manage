@@ -36,6 +36,7 @@
     }
 
     function AddBuilding($conn, $DATA){
+        
         $Name = $DATA["Name"];
         $Detail = $DATA["Detail"];
         $Sql = "SELECT	CONCAT('B',LPAD(MAX(CONVERT(SUBSTRING(BuildingID,-2),UNSIGNED INTEGER))+1,2,0)) AS BuildingID
@@ -52,7 +53,11 @@
         }
         $return['NewID'] = $NewID;
 
-        $Sql = "INSERT INTO	tb_building(BuildingID,Name,Detail,Date) VALUES ('$NewID','$Name','$Detail',NOW())";
+        $LastName = explode('.',$_FILES['file']['name']);
+        $FileName = $NewID.'.'.$LastName[1];
+        copy($_FILES['file']['tmp_name'],'../img/building/'.$FileName);
+
+        $Sql = "INSERT INTO	tb_building(BuildingID,Name,Detail,Picture,Date) VALUES ('$NewID','$Name','$Detail','$FileName',NOW())";
         $return['Sql'] = $Sql;
 
         if (mysqli_query($conn,$Sql)) {
@@ -83,12 +88,13 @@
         }
         else if ($DATA['STATUS'] == 'Logout') {
             Logout($conn, $DATA);
-        }
-    }else {
+        }  
+    }
+    
+    else {
         $return['status'] = "error";
         echo json_encode($return);
         mysqli_close($conn);
         die;
     }
-
 ?>

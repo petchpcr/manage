@@ -44,38 +44,39 @@
     }
 
     function AddBuilding(){
+      var File = $("#input-file-now").val();
       var Name = $("#new_name").val();
       var Detail = $("#new_detail").val();
-
-      if (Name == "" || Detail == "") {
+      
+      if (Name == "" || Detail == "" || File == "") {
         var Title = "ไม่สามรถเพิ่มข้อมูลได้";
-        var Text = "โปรดตรวจสอบ ชื่อ และ รายละเอียด ของอาคาร !";
+        var Text = "โปรดตรวจสอบ รูปภาพ, ชื่อ และ รายละเอียด ของอาคาร !";
         var Type = "warning";
         AlertError(Title,Text,Type);
 
       } else {
-        // $('form#frm_add_build').hide();
-        // var form = $('form#frm_add_build').serializeArray();
-        // $.ajax({
-        //     url: '../process/building.php',
-        //     type: 'post',
-        //     data: {
-        //       'form' : form,
-        //       'STATUS' : 'Tester'
-        //       },
-        //     dataType: 'text',
-        //     success: function(result){
-        //       console.log(result);
-        //     }
-        // });
-
-        var Data = {
+        var FileData = $("#input-file-now").prop("files")[0];
+        var form_data = new FormData();
+        var Data = JSON.stringify({
           'Name': Name,
           'Detail': Detail,
           'STATUS': 'AddBuilding'
-        };
-        senddata(JSON.stringify(Data));
-        $("#md_add_building").modal("hide");
+        });
+        form_data.append("file", FileData);
+        form_data.append("DATA", Data);
+        $.ajax({
+            url: '../process/building.php',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(result){
+              $("#md_add_building").modal("hide");
+              LoadBuilding();
+            }
+        });
       }
     }
 
@@ -141,9 +142,6 @@
                   $("#show_building").append(Str);
                 }
               }
-            }
-            else if(temp["form"] == 'AddBuilding'){
-              LoadBuilding();
             }
             else if(temp["form"] == 'Logout'){
                 window.location.href='login.html';
@@ -267,12 +265,11 @@
 
         <div class="modal-body">
           <div class="form-group px-4">
-
             <label>รูปภาพอาคาร</label>
             <div class="custom-file">
               <!-- <input type="file" id="browse_file" class="file-input">
               <label class="file-label" for="validatedCustomFile">Choose file...</label> -->
-              <input type="file" id="input-file-now" class="dropify" />
+              <input type="file" id="input-file-now" accept="image/x-png,image/jpeg" class="dropify" />
               <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
             </div>
 
