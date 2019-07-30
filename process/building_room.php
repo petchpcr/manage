@@ -78,6 +78,66 @@
         }
     }
 
+    function EditBuild($conn, $DATA){
+        $BuildID = $DATA["BuildID"];
+        $Name = $DATA["Name"];
+        $Detail = $DATA["Detail"];
+
+        $Sql = "UPDATE tb_building 
+                
+                SET Name = '$Name',
+                    Detail = '$Detail' 
+                
+                WHERE BuildingID = '$BuildID'";
+        $return['Sql'] = $Sql;
+
+        if (mysqli_query($conn,$Sql)) {
+            $return['status'] = "success";
+            $return['form'] = "EditBuild";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        } else {
+            $return['status'] = "failed";
+            $return['form'] = "EditBuild";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        }
+    }
+
+    function DeleteBuild($conn, $DATA){
+        $BuildID = $DATA["BuildID"];
+
+        $Sql = "SELECT Picture FROM tb_building WHERE BuildingID = '$BuildID'";
+        $return['Sql 1'] = $Sql;
+
+        $meQuery = mysqli_query($conn, $Sql);
+        while ($Result = mysqli_fetch_assoc($meQuery)) {
+            $Picture = $Result['Picture'];
+        }
+        $DeleteFile = unlink("../img/building/".$Picture);
+
+        if ($DeleteFile) {
+            $Sql = "DELETE FROM tb_building WHERE BuildingID = '$BuildID'";
+            $return['Sql 2'] = $Sql;
+            mysqli_query($conn,$Sql);
+
+            $return['status'] = "success";
+            $return['form'] = "DeleteBuild";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        } else {
+            $return['BuildID'] = $BuildID;
+            $return['status'] = "failed";
+            $return['form'] = "DeleteBuild";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        }
+    }
+
     function AddRoom($conn, $DATA){
         $BuildID = $DATA["BuildID"];
         $RoomID = $DATA["RoomID"];
@@ -206,6 +266,12 @@
         }
         else if ($DATA['STATUS'] == 'LoadRoom') {
             LoadRoom($conn, $DATA);
+        }
+        else if ($DATA['STATUS'] == 'EditBuild') {
+            EditBuild($conn, $DATA);
+        }
+        else if ($DATA['STATUS'] == 'DeleteBuild') {
+            DeleteBuild($conn, $DATA);
         }
         else if ($DATA['STATUS'] == 'AddRoom') {
             AddRoom($conn, $DATA);

@@ -21,6 +21,7 @@
     $(document).ready(function (e) {
       LoadBuilding();
       LoadRoom();
+      $('.dropify').dropify();
     });
 
     function LoadBuilding(){
@@ -47,7 +48,11 @@
     }
 
     function CallModal(Active){
-      if (Active == "Add") {
+      if (Active == "EditBuild") {
+        $("#md_edit_build").modal("show");
+
+      }
+      else if (Active == "AddRoom") {
         $("#new_id").val("");
         $("#new_name").val("");
         $("#new_type").val("");
@@ -55,12 +60,78 @@
 
         $("#btn_ok_add").show();
         $("#btn_ok_edit").hide();
+        $("#md_room").modal("show");
       }
-      else if (Active == "Edit") {
+      else if (Active == "EditRoom") {
         $("#btn_ok_add").hide();
         $("#btn_ok_edit").show();
+        $("#md_room").modal("show");
       }
-      $("#md_room").modal("show");
+    }
+
+    function EditBuild() {
+      var BuildID = '<?php echo $BuildID ?>';
+      var Name = $("#new_build_name").val();
+      var Detail = $("#new_build_detail").val();
+      
+      if (Name == "" || Detail == "") {
+        var Title = "ไม่สามรถแก้ไขข้อมูลได้";
+        var Text = "โปรดตรวจสอบ รูปภาพ, ชื่อ และ รายละเอียด ของอาคาร !";
+        var Type = "warning";
+        AlertError(Title,Text,Type);
+
+      } else {
+        var FileData = $("#new_build_img").prop("files")[0];
+        var form_data = new FormData();
+        var Data = JSON.stringify({
+          'BuildID': BuildID,
+          'Name': Name,
+          'Detail': Detail,
+          'STATUS': 'EditBuild'
+        });
+        form_data.append("file", FileData);
+        form_data.append("DATA", Data);
+        $.ajax({
+            url: '../process/building_room.php',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(result){
+              $("#md_edit_build").modal("hide");
+              LoadBuilding();
+            }
+        });
+      }
+    }
+
+    function DeleteBuild(){
+      var BuildID = '<?php echo $BuildID ?>';
+      var Title = "ยืนยันการลบข้อมูล";
+      var Text = "ต้องการลบอาคาร '"+BuildID+"' หรือไม่ ?";
+      var Type = "question";
+
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          
+          var Data = {
+            'BuildID': BuildID,
+            'STATUS': 'DeleteBuild'
+          };
+          senddata(JSON.stringify(Data));
+        }
+      })
     }
 
     function AddRoom(){
@@ -155,7 +226,6 @@
           senddata(JSON.stringify(Data));
         }
       })
-      
     }
 
     function AlertError(Title,Text,Type){
@@ -190,10 +260,23 @@
 
           if (temp["status"] == 'success') {
             if(temp["form"] == 'LoadBuilding'){
-              $("#show_build_id").append(temp['BuildingID']);
-              $("#show_build_name").append(temp['Name']);
-              $("#show_build_detail").append(temp['Detail']);
-              $("#show_build_date").append(temp['Date']);
+              var imagenUrl = "../img/building/"+temp['Picture'];
+              var drEvent = $('#new_build_img').dropify({});
+              drEvent = drEvent.data('dropify');
+              // drEvent.resetPreview();
+              // drEvent.clearElement();
+              drEvent.settings.defaultFile = imagenUrl;
+              drEvent.destroy();
+              drEvent.init();
+
+              $("#new_build_id").val(temp['BuildingID']);
+              $("#new_build_name").val(temp['Name']);
+              $("#new_build_detail").val(temp['Detail']);
+
+              $("#show_build_id").text("รหัสอาคาร : "+temp['BuildingID']);
+              $("#show_build_name").text("ชื่ออาคาร : "+temp['Name']);
+              $("#show_build_detail").text("รายละเอียดอาคาร : "+temp['Detail']);
+              $("#show_build_date").text("แก้ไขล่าสุด : "+temp['Date']);
               var Picture = temp['Picture'];
 
               if (temp['Picture'] == null || temp['Picture'] == "") {
@@ -225,6 +308,9 @@
                 table = $('#dataTable').DataTable(); // สร้างคุณสมบัติใหม่
               }
             }
+            else if(temp["form"] == 'DeleteBuild'){
+              window.location.href='building.php';              
+            }
             else if(temp["form"] == 'AddRoom'){
               LoadRoom();
             }
@@ -236,7 +322,7 @@
               $("#new_type").val(temp['Type']);
               $("#new_detail").val(temp['Detail']);
 
-              CallModal('Edit');
+              CallModal('EditRoom');
             }
             else if(temp["form"] == 'EditRoom'){
               LoadRoom();              
@@ -263,6 +349,10 @@
               Title = "ข้อมูลว่างเปล่า";
               Text = "ยังไม่มีข้อมูลห้อง !";
               Type = "info";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'DeleteBuild'){
+              Text = "การลบอาคาร '"+temp['BuildID']+"' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'AddRoom'){
@@ -314,14 +404,18 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="row m-3">
-            <div class="col-lg-4 col-md-12 mb-2">
-              <img id="show_build_img" class="img-thumbnail " style="width: auto" alt="Responsive image">
+            <div class="col-lg-4 col-md-12 mb-2 text-center">
+              <img id="show_build_img" class="img-thumbnail">
             </div>
             <div class="col-lg-8 col-md-12 mb-2">
-              <p id="show_build_id">รหัสอาคาร : </p>
-              <p id="show_build_name">ชื่ออาคาร : </p>
-              <p id="show_build_detail">รายละเอียดอาคาร : </p>
-              <p id="show_build_date">วันที่เพิ่มข้อมูล : </p>
+              <div class="d-flex justify-content-end w-100 position-absolute pr-3">
+                <button onclick="CallModal('EditBuild')" class="btn btn-warning mr-2"><i class="fas fa-edit"></i></button>
+                <button onclick="DeleteBuild()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+              </div>
+              <p id="show_build_id"></p>
+              <p id="show_build_name"></p>
+              <p id="show_build_detail"></p>
+              <p id="show_build_date"></p>
             </div>
           </div>
 
@@ -397,7 +491,7 @@
 
   <!-- Scroll to Top Button-->
   <div class="fix-btn">
-    <button onclick="CallModal('Add')" type="button" class="btn btn-block btn-success p-3">
+    <button onclick="CallModal('AddRoom')" type="button" class="btn btn-block btn-success p-3">
       <i class="fas fa-plus mr-1"></i>เพิ่ม
     </button>
   </div>
@@ -409,11 +503,50 @@
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
 
+  <div class="modal fade bd-example-modal-lg" id="md_edit_build" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit mr-2"></i>แก้ไขอาคาร</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group px-4">
+            <label>รหัสอาคาร</label>
+            <input type="text" id="new_build_id" class="form-control form-control-user mb-3" disabled>
+
+            <label>รูปภาพอาคาร</label>
+            <div class="custom-file">
+              <input type="file" id="new_build_img" accept="image/x-png,image/jpeg" class="dropify" />
+              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+            </div>
+
+            <label class="mt-3">ชื่ออาคาร</label>
+            <input type="text" id="new_build_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่ออาคาร">
+            <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
+            
+            <label>รายละเอียดอาคาร</label>
+            <textarea id="new_build_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
+            <button onclick="EditBuild()" class="btn btn-warning btn-user">แก้ไข</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade bd-example-modal-lg" id="md_room" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus mr-2"></i>เพิ่มห้องใหม่</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit mr-2"></i>แก้ไขห้อง</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>

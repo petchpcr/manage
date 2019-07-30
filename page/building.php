@@ -18,23 +18,7 @@
     $(document).ready(function (e) {
       LoadBuilding();
       $('.dropify').dropify();
-
-      // $('#browse_file').change(function(e){
-      //     var fileName = e.target.files[0].name;
-      //     alert(fileName);
-      // });
     });
-
-    
-
-    // $("form#frm_add_build").submit(function(e) {
-    //     e.preventDefault();    
-    //     var formData = new FormData(this);
-
-    //     $.post($(this).attr("action"), formData, function(data) {
-    //         alert(data);
-    //     });
-    // });
 
     function LoadBuilding(){
       var Data = {
@@ -44,7 +28,7 @@
     }
 
     function AddBuilding(){
-      var File = $("#input-file-now").val();
+      var File = $("#new_img").val();
       var Name = $("#new_name").val();
       var Detail = $("#new_detail").val();
       
@@ -55,7 +39,7 @@
         AlertError(Title,Text,Type);
 
       } else {
-        var FileData = $("#input-file-now").prop("files")[0];
+        var FileData = $("#new_img").prop("files")[0];
         var form_data = new FormData();
         var Data = JSON.stringify({
           'Name': Name,
@@ -73,7 +57,7 @@
             data: form_data,
             type: 'post',
             success: function(result){
-              $("#md_add_building").modal("hide");
+              $("#md_add_build").modal("hide");
               LoadBuilding();
             }
         });
@@ -241,7 +225,7 @@
   
   <!-- Scroll to Top Button-->
   <div class="fix-btn">
-    <button type="button" class="btn btn-block btn-success p-3" data-toggle="modal" data-target="#md_add_building">
+    <button type="button" class="btn btn-block btn-success p-3" data-toggle="modal" data-target="#md_add_build">
       <i class="fas fa-plus mr-1"></i>เพิ่ม
     </button>
   </div>
@@ -253,7 +237,7 @@
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
 
-  <div class="modal fade bd-example-modal-lg" id="md_add_building" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="md_add_build" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -267,9 +251,7 @@
           <div class="form-group px-4">
             <label>รูปภาพอาคาร</label>
             <div class="custom-file">
-              <!-- <input type="file" id="browse_file" class="file-input">
-              <label class="file-label" for="validatedCustomFile">Choose file...</label> -->
-              <input type="file" id="input-file-now" accept="image/x-png,image/jpeg" class="dropify" />
+              <input type="file" id="new_img" accept="image/x-png,image/jpeg" class="dropify" />
               <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
             </div>
 
