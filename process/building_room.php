@@ -9,7 +9,7 @@
         $Sql = "SELECT BuildingID,Name,Detail,Picture,Date
                 FROM tb_building
                 WHERE BuildingID = '$BuildID'";
-        $return['Sql 1'] = $Sql;
+        $return['Sql'] = $Sql;
 
         $meQuery = mysqli_query($conn, $Sql);
         while ($Result = mysqli_fetch_assoc($meQuery)) {
@@ -22,11 +22,6 @@
         }
 
         if ($boolean) {
-            $Sql = "SELECT BuildingID,Name,Detail,Picture,Date
-                FROM tb_building
-                WHERE BuildingID = '$BuildID'";
-            $return['Sql 2'] = $Sql;
-
             $return['status'] = "success";
             $return['form'] = "LoadBuilding";
             echo json_encode($return);
@@ -82,16 +77,36 @@
         $BuildID = $DATA["BuildID"];
         $Name = $DATA["Name"];
         $Detail = $DATA["Detail"];
+        $boolean = false;
+        
+        if(isset($_FILES['file'])){
+            $return['FileName'] = $_FILES['file']['name'];
+            $Sql = "SELECT Picture FROM tb_building WHERE BuildingID = '$BuildID'";
 
-        $Sql = "UPDATE tb_building 
-                
-                SET Name = '$Name',
-                    Detail = '$Detail' 
-                
-                WHERE BuildingID = '$BuildID'";
-        $return['Sql'] = $Sql;
+            $meQuery = mysqli_query($conn, $Sql);
+            while ($Result = mysqli_fetch_assoc($meQuery)) {
+                $Picture = $Result['Picture'];
+            }
+            $DeleteFile = unlink("../img/building/".$Picture);
 
-        if (mysqli_query($conn,$Sql)) {
+            if ($DeleteFile) {
+                $LastName = explode('.',$_FILES['file']['name']);
+                $FileName = $BuildID.'.'.$LastName[1];
+                copy($_FILES['file']['tmp_name'],'../img/building/'.$FileName);
+
+                $Sql = "UPDATE tb_building SET Name = '$Name',Detail = '$Detail' WHERE BuildingID = '$BuildID'";
+                $return['Sql'] = $Sql;
+                mysqli_query($conn,$Sql);
+                $boolean = true;
+            }
+        } else {
+            $Sql = "UPDATE tb_building SET Name = '$Name',Detail = '$Detail' WHERE BuildingID = '$BuildID'";
+            $return['Sql'] = $Sql;
+            mysqli_query($conn,$Sql);
+            $boolean = true;
+        }
+        
+        if ($boolean) {
             $return['status'] = "success";
             $return['form'] = "EditBuild";
             echo json_encode($return);
