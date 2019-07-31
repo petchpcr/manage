@@ -66,7 +66,6 @@
 
     function To_BuildingRoom(BuildID){
       var GET = '?BuildID='+BuildID;
-          // GET += '&BuildID2=555';
       window.location.href = 'building_room.php'+GET;
     }
 
@@ -147,7 +146,10 @@
             }
             
           } else if (temp['status'] == "error") {
-              alert("$_POST is NULL");
+            Title = "พบข้อผิดพลาด";
+            Text = "ไม่สามารถส่งข้อมูลได้ !";
+            Type = "error";
+            AlertError(Title,Text,Type);
           }
         }
       });
