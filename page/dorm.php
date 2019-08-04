@@ -106,7 +106,7 @@
 
               if (count == 0) {
                 Title = "ข้อมูลว่างเปล่า";
-                Text = "ยังไม่มีข้อมูลอาคาร !";
+                Text = "ยังไม่มีข้อมูลหอพัก !";
                 Type = "info";
                 AlertError(Title,Text,Type);
 
@@ -229,7 +229,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus mr-2"></i>เพิ่มอาคารใหม่</h5>
+            <h5 class="modal-title"><i class="fas fa-plus mr-2"></i>เพิ่มหอพักใหม่</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>
@@ -237,18 +237,18 @@
 
         <div class="modal-body">
           <div class="form-group px-4">
-            <label>รูปภาพอาคาร</label>
+            <label>รูปภาพหอพัก</label>
             <div class="custom-file">
               <input type="file" id="new_img" accept="image/x-png,image/jpeg" class="dropify" />
               <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
             </div>
 
-            <label class="mt-3">ชื่ออาคาร</label>
-            <input type="text" id="new_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่ออาคาร">
+            <label class="mt-3">ชื่อหอพัก</label>
+            <input type="text" id="new_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่อหอพัก">
             <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
             
-            <label>รายละเอียดอาคาร</label>
-            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดอาคาร"></textarea>
+            <label>รายละเอียดหอพัก</label>
+            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดหอพัก"></textarea>
           </div>
         </div>
 

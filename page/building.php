@@ -243,7 +243,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus mr-2"></i>เพิ่มอาคารใหม่</h5>
+            <h5 class="modal-title"><i class="fas fa-plus mr-2"></i>เพิ่มอาคารใหม่</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>

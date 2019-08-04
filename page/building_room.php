@@ -57,12 +57,14 @@
         $("#new_name").val("");
         $("#new_type").val("");
         $("#new_detail").val("");
+        $("#md_add_edit_head").text("เพิ่มห้อง");
 
         $("#btn_ok_add").show();
         $("#btn_ok_edit").hide();
         $("#md_room").modal("show");
       }
       else if (Active == "EditRoom") {
+        $("#md_add_edit_head").text("แก้ไขห้อง");
         $("#btn_ok_add").hide();
         $("#btn_ok_edit").show();
         $("#md_room").modal("show");
@@ -427,7 +429,7 @@
                   <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>ตารางข้อมูลห้อง</h6>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
+                  <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
                 </div>
               </div>
   
@@ -507,7 +509,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit mr-2"></i>แก้ไขอาคาร</h5>
+            <h5 class="modal-title"><i class="fas fa-edit mr-2"></i>แก้ไขอาคาร</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>
@@ -546,7 +548,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit mr-2"></i>แก้ไขห้อง</h5>
+            <h5 class="modal-title"><i class="fas fa-edit mr-2"></i><label id="md_add_edit_head"></label></h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>

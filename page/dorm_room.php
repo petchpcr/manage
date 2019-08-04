@@ -1,3 +1,6 @@
+<?php
+    $DormID = $_GET['DormID'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +17,417 @@
   <!-- CSS Script-->
   <?php require_once 'script_css.php';?>
 
+  <script>
+    $(document).ready(function (e) {
+      LoadDorm();
+      LoadFloor();
+      LoadRoom();
+      $('.dropify').dropify();
+    });
+
+    function LoadDorm(){
+      var DormID = '<?php echo $DormID ?>';
+      var Data = {
+        'DormID': DormID,
+        'STATUS': 'LoadDorm'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function LoadFloor(){
+      var DormID = '<?php echo $DormID ?>';
+      var Data = {
+        'DormID': DormID,
+        'STATUS': 'LoadFloor'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function LoadRoom(){
+      var DormID = '<?php echo $DormID ?>';
+      var Data = {
+        'DormID': DormID,
+        'STATUS': 'LoadRoom'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function ShowEmpty(){
+      var Str = "<tr class='odd'><td valign='top' colspan='6' class='dataTables_empty'>No data available in table</td></tr>";
+      $("#show_room").append(Str);
+    }
+
+    function CallModal(Active){
+      if (Active == "EditDorm") {
+        $("#md_edit_dorm").modal("show");
+      }
+      else if (Active == "AddRoom") {
+        $("#new_id").val("");
+        $("#new_name").val("");
+        $("#new_type").val("");
+        $("#new_detail").val("");
+        $("#md_add_edit_head").text("เพิ่มห้อง");
+
+        $("#btn_ok_add").show();
+        $("#btn_ok_edit").hide();
+        $("#md_room").modal("show");
+      }
+      else if (Active == "EditRoom") {
+        $("#md_add_edit_head").text("แก้ไขห้อง");
+        $("#btn_ok_add").hide();
+        $("#btn_ok_edit").show();
+        $("#md_room").modal("show");
+      }
+    }
+
+    function EditDorm() {
+      var DormID = '<?php echo $DormID ?>';
+      var Name = $("#new_dorm_name").val();
+      var Detail = $("#new_dorm_detail").val();
+      
+      if (Name == "" || Detail == "") {
+        var Title = "ไม่สามรถแก้ไขข้อมูลได้";
+        var Text = "โปรดตรวจสอบ รูปภาพ, ชื่อ และ รายละเอียด ของหอพัก !";
+        var Type = "warning";
+        AlertError(Title,Text,Type);
+
+      } else {
+        var FileData = $("#new_dorm_img").prop("files")[0];
+        var form_data = new FormData();
+        var Data = JSON.stringify({
+          'DormID': DormID,
+          'Name': Name,
+          'Detail': Detail,
+          'STATUS': 'EditDorm'
+        });
+        form_data.append("file", FileData);
+        form_data.append("DATA", Data);
+        $.ajax({
+            url: '../process/dorm_room.php',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(result){
+              $("#md_edit_dorm").modal("hide");
+              LoadDorm();
+            }
+        });
+      }
+    }
+
+    function DeleteDorm(){
+      var DormID = '<?php echo $DormID ?>';
+      var Title = "ยืนยันการลบข้อมูล";
+      var Text = "ต้องการลบหอพัก '"+DormID+"' หรือไม่ ?";
+      var Type = "question";
+
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          
+          var Data = {
+            'DormID': DormID,
+            'STATUS': 'DeleteDorm'
+          };
+          senddata(JSON.stringify(Data));
+        }
+      })
+    }
+
+    function AddRoom(){
+      var File = $("#new_img").val();
+      var DormID = '<?php echo $DormID ?>';
+      var RoomID = $("#new_id").val();
+      var Detail = $("#new_detail").val();
+      
+      if (RoomID == "" || Detail == "" || File == "") {
+        var Title = "ไม่สามรถเพิ่มข้อมูลได้";
+        var Text = "โปรดตรวจสอบ รูปภาพ, ชื่อ และ รายละเอียด ของห้องพัก !";
+        var Type = "warning";
+        AlertError(Title,Text,Type);
+
+      } else {
+        var FileData = $("#new_img").prop("files")[0];
+        var form_data = new FormData();
+        var Data = JSON.stringify({
+          'DormID': DormID,
+          'RoomID': RoomID,
+          'Detail': Detail,
+          'STATUS': 'AddRoom'
+        });
+        form_data.append("file", FileData);
+        form_data.append("DATA", Data);
+        $.ajax({
+            url: '../process/dorm_room.php',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(result){
+              $("#md_room").modal("hide");
+              LoadFloor();
+              LoadRoom();
+            }
+        });
+      }
+    }
+
+    function ShowEditRoom(RoomID){
+      var Data = {
+        'RoomID': RoomID,
+        'STATUS': 'ShowEditRoom'
+      };
+      senddata(JSON.stringify(Data));
+    }
+
+    function EditRoom(){
+      var RoomID = $("#new_id").val();
+      
+      if (RoomID == "") {
+        var Title = "ไม่สามรถแก้ไขข้อมูลได้";
+        var Text = "โปรดตรวจสอบ รหัสห้อง !";
+        var Type = "warning";
+        AlertError(Title,Text,Type);
+      }
+      else {
+        var DormID = '<?php echo $DormID ?>';
+        var RealID = $("#real_id").val();
+        var RoomID = $("#new_id").val();
+        var Name = $("#new_name").val();
+        var Type = $("#new_type").val();
+        var Detail = $("#new_detail").val();
+
+        var Data = {
+          'DormID': DormID,
+          'RealID': RealID,
+          'RoomID': RoomID,
+          'Name': Name,
+          'Type': Type,
+          'Detail': Detail,
+          'STATUS': 'EditRoom'
+        };
+        senddata(JSON.stringify(Data));
+        $("#md_room").modal("hide");
+      }
+    }
+
+    function DeleteRoom(RoomID){
+      var SubID = RoomID.substring(4);
+      var Title = "ยืนยันการลบข้อมูล";
+      var Text = "ต้องการลบห้อง '"+SubID+"' หรือไม่ ?";
+      var Type = "question";
+
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          
+          var Data = {
+            'RoomID': RoomID,
+            'SubID': SubID,
+            'STATUS': 'DeleteRoom'
+          };
+          senddata(JSON.stringify(Data));
+        }
+      })
+    }
+
+    function AlertError(Title,Text,Type){
+      Swal.fire({
+        title: Title,
+        text: Text,
+        type: Type,
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง'
+      })
+    }
+
+    function senddata(Data) {
+      var form_data = new FormData();
+      form_data.append("DATA", Data);
+      var URL = '../process/dorm_room.php';
+      $.ajax({
+        url: URL,
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function (result) {
+          try {
+            var temp = $.parseJSON(result);
+          } catch (e) {
+            console.log('Error#542-decode error');
+          }
+
+          if (temp["status"] == 'success') {
+            if(temp["form"] == 'LoadDorm'){
+              var imagenUrl = "../img/dorm/"+temp['Picture'];
+              var drEvent = $('#new_dorm_img').dropify({});
+              drEvent = drEvent.data('dropify');
+              drEvent.settings.defaultFile = imagenUrl;
+              drEvent.destroy();
+              drEvent.init();
+
+              $("#new_dorm_id").val(temp['DormID']);
+              $("#new_dorm_name").val(temp['Name']);
+              $("#new_dorm_detail").val(temp['Detail']);
+
+              $("#show_dorm_id").text("รหัสหอพัก : "+temp['DormID']);
+              $("#show_dorm_name").text("ชื่อหอพัก : "+temp['Name']);
+              $("#show_dorm_detail").text("รายละเอียดหอพัก : "+temp['Detail']);
+              $("#show_dorm_date").text("แก้ไขล่าสุด : "+temp['Date']);
+              var Picture = temp['Picture'];
+
+              if (temp['Picture'] == null || temp['Picture'] == "") {
+                Picture = "Default.png";
+              }
+
+              $("#show_dorm_img").attr("src","../img/Dorm/" + Picture);
+            }
+            else if(temp["form"] == 'LoadFloor'){
+              $("#floor").show();
+              $('#all_floor').nextAll().remove()
+              for (var i = 0; i < temp['count']; i++) {
+                var Str = "<option value="+temp[i]['Floor']+"> ชั้น "+temp[i]['Floor']+"</option>";
+                $("#floor").append(Str);
+              }              
+            }
+            else if(temp["form"] == 'LoadRoom'){
+              var count = temp['count'];
+              //table = $('#dataTable').DataTable(); // เรียกตาราง
+              //table.destroy(); // ทำลายคุณสมบัติ
+              $("#show_room").empty();
+              for (var i = 0; i < count; i++) {
+                var Floor = $("#floor").val();
+                var Room_floor = temp[i]['RoomID'].substring(4,5);
+                var Status_class = "free";
+                var Status_text = "ว่าง";
+
+                if (temp[i]['Status'] == 1) {
+                  Status_class = "lend";
+                  Status_text = "จองแล้ว";
+                }
+                else if (temp[i]['Status'] == 2) {
+                  Status_class = "live";
+                  Status_text = "มีผู้พัก";
+                }
+                // var Str = "<tr><td>"+temp[i]['RoomID']+"</td><td>"+Status_text+"</td><td>"+temp[i]['Date']+"</td>";
+                //     Str += "<td class='py-1 px-2'><button onclick='ShowEditRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-warning'><i class='fas fa-edit'></i></button></td>";
+                //     Str += "<td class='py-1 px-2'><button onclick='DeleteRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-danger'><i class='fas fa-trash-alt'></i></button></td></tr>";
+                
+                var Str = "<div class='col-xl-2 col-lg-3 col-md-4 col-sm-6 px-2 mb-3'><button onclick='' class='btn btn-outline-warning btn-block shadow'>";
+                    Str += "<div class='col-12'><img class='img_list_room' src='../img/dorm/room/"+temp[i]['Picture']+"'></div>";
+                    Str += "<div class='col-12'><div class='list-head'>"+temp[i]['RoomID']+"</div><div class='list-"+Status_class+"'>"+Status_text+"</div></div></button></div>";
+
+                if (Floor == 0) {
+                  $("#show_room").append(Str);
+                }
+                else {
+                  if (Floor == Room_floor) {
+                    $("#show_room").append(Str);
+                  }
+                }
+              }
+              //table = $('#dataTable').DataTable(); // สร้างคุณสมบัติใหม่
+            
+            }
+            else if(temp["form"] == 'DeleteDorm'){
+              window.location.href='dorm.php';              
+            }
+            else if(temp["form"] == 'ShowEditRoom'){
+              var SubID = temp['RoomID'].substring(4);
+              $("#real_id").val(temp['RoomID']);
+              $("#new_id").val(SubID);
+              $("#new_name").val(temp['Name']);
+              $("#new_type").val(temp['Type']);
+              $("#new_detail").val(temp['Detail']);
+
+              CallModal('EditRoom');
+            }
+            else if(temp["form"] == 'EditRoom'){
+              LoadFloor();
+              LoadRoom();              
+            }
+            else if(temp["form"] == 'DeleteRoom'){
+              LoadFloor();
+              LoadRoom();              
+            }
+            else if(temp["form"] == 'Logout'){
+              window.location.href='login.html';
+            }
+
+          } else if (temp['status'] == "failed") {
+            var Title = "พบข้อผิดพลาด";
+            var Text = "";
+            var Type = "error";
+            
+            if(temp["form"] == 'LoadDorm'){
+              Text = "เรียกดูหอพัก '"+temp['DormID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'LoadFloor'){
+              $("#floor").hide();              
+            }
+            else if(temp["form"] == 'LoadRoom'){
+              $("#show_room").empty();
+              // ShowEmpty();
+              Title = "ข้อมูลว่างเปล่า";
+              Text = "ยังไม่มีข้อมูลห้อง !";
+              Type = "info";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'DeleteDorm'){
+              Text = "การลบหอพัก '"+temp['DormID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'AddRoom'){
+              Text = "การเพิ่มห้องพัก '"+temp['RoomID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'ShowEditRoom'){
+              var SubID = temp['RoomID'].substring(4);
+              Text = "เรียกดูข้อมูลห้องพัก '"+SubID+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'EditRoom'){
+              Text = "แก้ไขข้อมูลห้องพัก '"+temp['RoomID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+            else if(temp["form"] == 'DeleteRoom'){
+              Text = "การลบห้องพัก '"+temp['SubID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
+
+          } else if (temp['status'] == "error") {
+              alert("$_POST is NULL");
+          }
+        }
+      });
+    }
+  </script>
 </head>
 
 <body id="page-top">
@@ -38,19 +452,45 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <div class="row m-3">
-            <div class="col-lg-4 col-md-12 mb-2">
-              <img class="img-thumbnail " src="../img/dorm.jpg" style="width: auto" alt="Responsive image">
+            <div class="col-lg-4 col-md-12 mb-2 text-center">
+              <img id="show_dorm_img" class="img-thumbnail">
             </div>
             <div class="col-lg-8 col-md-12 mb-2">
-              <p>รหัสหอพัก : </p>
-              <p>ชื่อหอพัก : </p>
-              <p>รายละเอียดหอพัก : </p>
-              <p>วันที่เพิ่มข้อมูล : </p>
+              <div class="d-flex justify-content-end w-100 position-absolute pr-3">
+                <button onclick="CallModal('EditDorm')" class="btn btn-warning mr-2"><i class="fas fa-edit"></i></button>
+                <button onclick="DeleteDorm()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+              </div>
+              <p id="show_dorm_id"></p>
+              <p id="show_dorm_name"></p>
+              <p id="show_dorm_detail"></p>
+              <p id="show_dorm_date"></p>
             </div>
           </div>
-            
+          
+          <div class="row px-3 mb-4">
+            <select onchange="LoadRoom()" class="form-control shadow mx-2" id="floor" style="text-align-last:center;">
+              <option id="all_floor" value="0" selected>ทุกชั้น</option>
+            </select>
+          </div>
+
+          <div id="show_room" class="row px-3">
+
+            <!-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 px-2 mb-3">
+              <button class="btn btn-outline-warning btn-block shadow">
+                <div class="col-12">
+                  <img class="img_list_room" src="../img/building/B01.jpg">
+                </div>
+                <div class="col-12">
+                  <div class="list-head">D01-102</div>
+                  <div class="list-lend">จองแล้ว</div>
+                </div>
+              </button>
+            </div> -->
+
+          </div>
+          
           <!-- DataTales Example -->
-          <div class="card shadow mb-4">
+          <!-- <div class="card shadow mb-4">
             <div class="card-header py-3 text-right">
               <div class="row">
                 <div class="col-6 text-left d-flex align-items-center">
@@ -61,259 +501,27 @@
                 </div>
               </div>
             </div>
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>รหัสห้องพัก</th>
-                      <th>รหัสหอพัก</th>
-                      <th>รายละเอียดห้องพัก</th>
-                      <th>รูปห้องพัก</th>
                       <th>สถานะห้อง</th>
                       <th>แก้ไขล่าสุด</th>
-                      <th>แก้ไข</th>
-                      <th>ลบ</th>
+                      <th width="50px">แก้ไข</th>
+                      <th width="50px">ลบ</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>88888888888888</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th class="text-center"><i class="fas fa-edit"></i></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                  </tbody>
+
+                  <tbody id="show_room"></tbody>
+                  
                 </table>
               </div>
             </div>
-          </div>
+          </div> -->
+
         </div>
         <!-- /.container-fluid -->
 
@@ -337,12 +545,95 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
+  <div class="fix-btn">
+    <button onclick="CallModal('AddRoom')" type="button" class="btn btn-block btn-success p-3">
+      <i class="fas fa-plus mr-1"></i>เพิ่ม
+    </button>
+  </div>
+
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
   <!-- Logout Modal-->
   <?php require_once 'md_logout.php';?>
+  
+  <div class="modal fade bd-example-modal-lg" id="md_edit_dorm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-edit mr-2"></i>แก้ไขหอพัก</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group px-4">
+            <label>รหัสหอพัก</label>
+            <input type="text" id="new_dorm_id" class="form-control form-control-user mb-3" disabled>
+
+            <label>รูปภาพหอพัก</label>
+            <div class="custom-file">
+              <input type="file" id="new_dorm_img" accept="image/x-png,image/jpeg" class="dropify" />
+              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+            </div>
+
+            <label class="mt-3">ชื่อหอพัก</label>
+            <input type="text" id="new_dorm_name" class="form-control form-control-user" maxlength="30" placeholder="กรอกชื่อหอพัก">
+            <small class="form-text text-muted mb-3">- ความยาวสูงสุด 30 ตัวอักษร -</small>
+            
+            <label>รายละเอียดหอพัก</label>
+            <textarea id="new_dorm_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดหอพัก"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
+            <button onclick="EditDorm()" class="btn btn-warning btn-user">แก้ไข</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" id="md_room" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-plus mr-2"></i><label id="md_add_edit_head"></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group px-4">
+            <input type="text" id="real_id" hidden>
+            <label>รูปภาพห้องพัก</label>
+            <div class="custom-file">
+              <input type="file" id="new_img" accept="image/x-png,image/jpeg" class="dropify" />
+              <small class="form-text text-muted">- สนับสนุนไฟล์ประเภท .jpg .png -</small>
+            </div>
+
+            <label class="mt-3">รหัสห้อง</label>
+            <input type="text" id="new_id" class="form-control form-control-user" maxlength="3" placeholder="กรอกรหัสห้อง">
+            <small class="form-text text-muted mb-3">- ตัวเลข 3 หลัก -</small>
+
+            <label>รายละเอียดห้อง</label>
+            <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดห้อง"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
+          <button onclick="AddRoom()" id="btn_ok_add" class="btn btn-success btn-user">เพิ่ม</button>
+          <button onclick="EditRoom()" id="btn_ok_edit" class="btn btn-warning btn-user">แก้ไข</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
   <!-- JS Script-->
   <?php require_once 'script_js.php';?>
