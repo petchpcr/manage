@@ -265,8 +265,8 @@
               var imagenUrl = "../img/building/"+temp['Picture'];
               var drEvent = $('#new_build_img').dropify({});
               drEvent = drEvent.data('dropify');
-              // drEvent.resetPreview();
-              // drEvent.clearElement();
+              drEvent.resetPreview();
+              drEvent.clearElement();
               drEvent.settings.defaultFile = imagenUrl;
               drEvent.destroy();
               drEvent.init();

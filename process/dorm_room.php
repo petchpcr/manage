@@ -73,7 +73,6 @@
         $DormID = $DATA["DormID"];
         $return['DormID'] = $DormID;
         $count = 0;
-        $cnt_Floor = 0;
 
         $Sql = "SELECT RoomID,Detail,Picture,Status,Date
                 FROM tb_dorm_room
@@ -108,6 +107,7 @@
 
     function EditDorm($conn, $DATA){
         $DormID = $DATA["DormID"];
+        $return['DormID'] = $DormID;
         $Name = $DATA["Name"];
         $Detail = $DATA["Detail"];
         $boolean = false;
@@ -156,7 +156,7 @@
 
     function DeleteDorm($conn, $DATA){
         $DormID = $DATA["DormID"];
-
+        
         $Sql = "SELECT Picture FROM tb_dorm WHERE DormID = '$DormID'";
         $return['Sql 1'] = $Sql;
 
@@ -167,6 +167,15 @@
         $DeleteFile = unlink("../img/dorm/".$Picture);
 
         if ($DeleteFile) {
+
+            $Sql = "SELECT Picture FROM tb_dorm_room WHERE DormID = '$DormID'";
+            $return['Sql'] = $Sql;
+
+            $meQuery = mysqli_query($conn, $Sql);
+            while ($Result = mysqli_fetch_assoc($meQuery)) {
+                unlink("../img/dorm/room/".$Result['Picture']);
+            }
+
             $Sql = "DELETE FROM tb_dorm WHERE DormID = '$DormID'";
             $return['Sql 2'] = $Sql;
             mysqli_query($conn,$Sql);
@@ -180,6 +189,40 @@
             $return['DormID'] = $DormID;
             $return['status'] = "failed";
             $return['form'] = "DeleteDorm";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        }
+    }
+
+    function ViewRoom($conn, $DATA){
+        $RoomID = $DATA["RoomID"];
+        $return['RoomID'] = $RoomID;
+        $boolean = false;
+        
+        $Sql = "SELECT Detail,Picture,Status,Date 
+                FROM tb_dorm_room
+                WHERE RoomID = '$RoomID'";
+        $return['Sql'] = $Sql;
+
+        $meQuery = mysqli_query($conn, $Sql);
+        while ($Result = mysqli_fetch_assoc($meQuery)) {
+            $return['Detail'] = $Result['Detail'];
+            $return['Picture'] = $Result['Picture'];
+            $return['Status'] = $Result['Status'];
+            $return['Date'] = $Result['Date'];
+            $boolean = true;
+        }
+
+        if ($boolean) {
+            $return['status'] = "success";
+            $return['form'] = "ViewRoom";
+            echo json_encode($return);
+            mysqli_close($conn);
+            die;
+        } else {
+            $return['status'] = "failed";
+            $return['form'] = "ViewRoom";
             echo json_encode($return);
             mysqli_close($conn);
             die;
@@ -215,59 +258,59 @@
         }
     }
 
-    function ShowEditRoom($conn, $DATA){
-        $RoomID = $DATA["RoomID"];
-        $return['RoomID'] = $RoomID;
-        $boolean = false;
-        
-        $Sql = "SELECT Name,Type,Detail 
-                FROM tb_dorm_room
-                WHERE RoomID = '$RoomID'";
-        $return['Sql'] = $Sql;
-
-        $meQuery = mysqli_query($conn, $Sql);
-        while ($Result = mysqli_fetch_assoc($meQuery)) {
-            $return['Name'] = $Result['Name'];
-            $return['Type'] = $Result['Type'];
-            $return['Detail'] = $Result['Detail'];
-            $boolean = true;
-        }
-
-        if ($boolean) {
-            $return['status'] = "success";
-            $return['form'] = "ShowEditRoom";
-            echo json_encode($return);
-            mysqli_close($conn);
-            die;
-        } else {
-            $return['status'] = "failed";
-            $return['form'] = "ShowEditRoom";
-            echo json_encode($return);
-            mysqli_close($conn);
-            die;
-        }
-    }
-
     function EditRoom($conn, $DATA){
         $DormID = $DATA["DormID"];
         $RealID = $DATA["RealID"];
         $RoomID = $DATA["RoomID"];
-        $Name = $DATA["Name"];
-        $Type = $DATA["Type"];
+        $Status = $DATA["Status"];
         $Detail = $DATA["Detail"];
         $NewID = $DormID."-".$RoomID;
+        $boolean = false;
 
-        $Sql = "UPDATE tb_dorm_room 
-                
-                SET RoomID = '$NewID',
-                    Name = '$Name',
-                    Type = '$Type',
-                    Detail = '$Detail' 
-                
-                WHERE RoomID = '$RealID'";
-        $return['Sql'] = $Sql;
+        if(isset($_FILES['file'])){
+            $return['FileName'] = $_FILES['file']['name'];
+            $Sql = "SELECT Picture FROM tb_dorm_room WHERE RoomID = '$RealID'";
 
-        if (mysqli_query($conn,$Sql)) {
+            $meQuery = mysqli_query($conn, $Sql);
+            while ($Result = mysqli_fetch_assoc($meQuery)) {
+                $Picture = $Result['Picture'];
+            }
+            $DeleteFile = unlink("../img/dorm/room/".$Picture);
+
+            if ($DeleteFile) {
+                $LastName = explode('.',$_FILES['file']['name']);
+                $FileName = $NewID.'.'.$LastName[1];
+                copy($_FILES['file']['tmp_name'],'../img/dorm/room/'.$FileName);
+
+                $Sql = "UPDATE tb_dorm_room 
+                
+                        SET RoomID = '$NewID',
+                            Detail = '$Detail',
+                            Picture = '$FileName',
+                            Status = '$Status'
+                        
+                        WHERE RoomID = '$RealID'";
+                $return['Sql'] = $Sql;
+                if (mysqli_query($conn,$Sql)) {
+                    $boolean = true;
+                }
+            }
+        }
+        else {
+            $Sql = "UPDATE tb_dorm_room 
+                
+                    SET RoomID = '$NewID',
+                        Detail = '$Detail',
+                        Status = '$Status'
+                    
+                    WHERE RoomID = '$RealID'";
+            $return['Sql'] = $Sql;
+            if (mysqli_query($conn,$Sql)) {
+                $boolean = true;
+            }
+        }
+
+        if ($boolean) {
             $return['status'] = "success";
             $return['form'] = "EditRoom";
             echo json_encode($return);
@@ -286,19 +329,27 @@
 
     function DeleteRoom($conn, $DATA){
         $RoomID = $DATA["RoomID"];
-        $SubID = $DATA["SubID"];
 
-        $Sql = "DELETE FROM tb_dorm_room WHERE RoomID = '$RoomID'";
-        $return['Sql'] = $Sql;
+        $Sql = "SELECT Picture FROM tb_dorm_room WHERE RoomID = '$RoomID'";
 
-        if (mysqli_query($conn,$Sql)) {
+        $meQuery = mysqli_query($conn, $Sql);
+        while ($Result = mysqli_fetch_assoc($meQuery)) {
+            $Picture = $Result['Picture'];
+        }
+        $DeleteFile = unlink("../img/dorm/room/".$Picture);
+        
+        if ($DeleteFile) {
+            $Sql = "DELETE FROM tb_dorm_room WHERE RoomID = '$RoomID'";
+            $return['Sql'] = $Sql;
+            mysqli_query($conn,$Sql);
+
             $return['status'] = "success";
             $return['form'] = "DeleteRoom";
             echo json_encode($return);
             mysqli_close($conn);
             die;
         } else {
-            $return['SubID'] = $SubID;
+            $return['RoomID'] = $RoomID;
             $return['status'] = "failed";
             $return['form'] = "DeleteRoom";
             echo json_encode($return);
@@ -326,11 +377,11 @@
         else if ($DATA['STATUS'] == 'DeleteDorm') {
             DeleteDorm($conn, $DATA);
         }
+        else if ($DATA['STATUS'] == 'ViewRoom') {
+            ViewRoom($conn, $DATA);
+        }
         else if ($DATA['STATUS'] == 'AddRoom') {
             AddRoom($conn, $DATA);
-        }
-        else if ($DATA['STATUS'] == 'ShowEditRoom') {
-            ShowEditRoom($conn, $DATA);
         }
         else if ($DATA['STATUS'] == 'EditRoom') {
             EditRoom($conn, $DATA);

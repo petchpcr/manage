@@ -31,7 +31,7 @@
         'DormID': DormID,
         'STATUS': 'LoadDorm'
       };
-      senddata(JSON.stringify(Data));
+      senddata(JSON.stringify(Data),0);
     }
 
     function LoadFloor(){
@@ -40,7 +40,7 @@
         'DormID': DormID,
         'STATUS': 'LoadFloor'
       };
-      senddata(JSON.stringify(Data));
+      senddata(JSON.stringify(Data),0);
     }
 
     function LoadRoom(){
@@ -49,7 +49,7 @@
         'DormID': DormID,
         'STATUS': 'LoadRoom'
       };
-      senddata(JSON.stringify(Data));
+      senddata(JSON.stringify(Data),0);
     }
 
     function ShowEmpty(){
@@ -66,14 +66,54 @@
         $("#new_name").val("");
         $("#new_type").val("");
         $("#new_detail").val("");
-        $("#md_add_edit_head").text("เพิ่มห้อง");
+        $("#md_view_add_edit_head").text("เพิ่มห้อง");
 
+        $("#new_img").prop("disabled",false);
+        var drEvent = $('#new_img').dropify();
+        drEvent = drEvent.data('dropify');
+        drEvent.resetPreview();
+        drEvent.clearElement();
+        drEvent.settings.defaultFile = "";
+        drEvent.destroy();
+        drEvent.init();
+        $("#new_id").prop("disabled",false);
+        $("#new_detail").prop("disabled",false);
+
+        $("#group_edit_del").hide();
+        $("#group_status").hide();
+        $("#group_update").hide();
+        $("#md_room_foot").show();
         $("#btn_ok_add").show();
         $("#btn_ok_edit").hide();
         $("#md_room").modal("show");
       }
+      else if (Active == "ViewRoom") {
+        $("#md_view_add_edit_head").text("เรียกดูห้อง");
+
+        $("#new_img").prop("disabled",true);
+        $("#new_id").prop("disabled",true);
+        $("#new_detail").prop("disabled",true);
+        $('#room_status').prop("disabled",true);
+        $("#room_update").prop("disabled",true);
+
+        $("#group_edit_del").show();
+        $("#group_status").show();
+        $("#group_update").show();
+        $("#md_room_foot").hide();
+        $("#md_room").modal("show");
+      }
       else if (Active == "EditRoom") {
-        $("#md_add_edit_head").text("แก้ไขห้อง");
+        $("#md_view_add_edit_head").text("แก้ไขห้อง");
+
+        $("#new_img").prop("disabled",false);
+        $("#new_id").prop("disabled",false);
+        $("#new_detail").prop("disabled",false);
+        $('#room_status').prop("disabled",false);
+        $("#room_update").prop("disabled",false);
+
+        $("#group_status").hide();
+        $("#group_update").hide();
+        $("#md_room_foot").show();
         $("#btn_ok_add").hide();
         $("#btn_ok_edit").show();
         $("#md_room").modal("show");
@@ -92,29 +132,13 @@
         AlertError(Title,Text,Type);
 
       } else {
-        var FileData = $("#new_dorm_img").prop("files")[0];
-        var form_data = new FormData();
-        var Data = JSON.stringify({
+        var Data = {
           'DormID': DormID,
           'Name': Name,
           'Detail': Detail,
           'STATUS': 'EditDorm'
-        });
-        form_data.append("file", FileData);
-        form_data.append("DATA", Data);
-        $.ajax({
-            url: '../process/dorm_room.php',
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            success: function(result){
-              $("#md_edit_dorm").modal("hide");
-              LoadDorm();
-            }
-        });
+        };
+        senddata(JSON.stringify(Data),"#new_dorm_img");
       }
     }
 
@@ -140,9 +164,18 @@
             'DormID': DormID,
             'STATUS': 'DeleteDorm'
           };
-          senddata(JSON.stringify(Data));
+          senddata(JSON.stringify(Data),0);
         }
       })
+    }
+
+    function ViewRoom(RoomID){
+      var Data = {
+        'RoomID': RoomID,
+        'STATUS': 'ViewRoom'
+      };
+      senddata(JSON.stringify(Data),0);
+      $("#new_img").prop("disabled",true);
     }
 
     function AddRoom(){
@@ -158,76 +191,66 @@
         AlertError(Title,Text,Type);
 
       } else {
-        var FileData = $("#new_img").prop("files")[0];
-        var form_data = new FormData();
-        var Data = JSON.stringify({
+        var Data = {
           'DormID': DormID,
           'RoomID': RoomID,
           'Detail': Detail,
           'STATUS': 'AddRoom'
-        });
-        form_data.append("file", FileData);
-        form_data.append("DATA", Data);
-        $.ajax({
-            url: '../process/dorm_room.php',
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            success: function(result){
-              $("#md_room").modal("hide");
-              LoadFloor();
-              LoadRoom();
-            }
-        });
+        };
+        senddata(JSON.stringify(Data),"#new_img");
       }
     }
 
-    function ShowEditRoom(RoomID){
-      var Data = {
-        'RoomID': RoomID,
-        'STATUS': 'ShowEditRoom'
-      };
-      senddata(JSON.stringify(Data));
+    function ShowEditRoom(){
+      $("#new_img").prop("disabled",false);
+      var drEvent = $('#new_img').dropify();
+      drEvent = drEvent.data('dropify');
+      drEvent.resetPreview();
+      drEvent.clearElement();
+      drEvent.destroy();
+      drEvent.init();
+      $("#new_id").prop("disabled",false);
+      $("#new_detail").prop("disabled",false);
+      $("#room_status").prop("disabled",false);
+
+      $("#group_update").hide();
+      $("#md_room_foot").show();
+      $("#btn_ok_add").hide();
+      $("#btn_ok_edit").show();
     }
 
     function EditRoom(){
       var RoomID = $("#new_id").val();
-      
-      if (RoomID == "") {
+      var Detail = $("#new_detail").val();
+      var Image = $("#new_img").val();
+
+      if (RoomID == "" || Detail == "") {
         var Title = "ไม่สามรถแก้ไขข้อมูลได้";
-        var Text = "โปรดตรวจสอบ รหัสห้อง !";
+        var Text = "โปรดตรวจสอบ รหัสห้อง และรายละเอียด ของอาคาร !";
         var Type = "warning";
         AlertError(Title,Text,Type);
       }
       else {
         var DormID = '<?php echo $DormID ?>';
         var RealID = $("#real_id").val();
-        var RoomID = $("#new_id").val();
-        var Name = $("#new_name").val();
-        var Type = $("#new_type").val();
-        var Detail = $("#new_detail").val();
+        var Status = $("#room_status").val();
 
         var Data = {
           'DormID': DormID,
           'RealID': RealID,
           'RoomID': RoomID,
-          'Name': Name,
-          'Type': Type,
+          'Status': Status,
           'Detail': Detail,
           'STATUS': 'EditRoom'
         };
-        senddata(JSON.stringify(Data));
-        $("#md_room").modal("hide");
+        senddata(JSON.stringify(Data),"#new_img");
       }
     }
 
-    function DeleteRoom(RoomID){
-      var SubID = RoomID.substring(4);
+    function DeleteRoom(){
+      var RoomID = $("#real_id").val();
       var Title = "ยืนยันการลบข้อมูล";
-      var Text = "ต้องการลบห้อง '"+SubID+"' หรือไม่ ?";
+      var Text = "ต้องการลบห้อง '"+RoomID+"' หรือไม่ ?";
       var Type = "question";
 
       Swal.fire({
@@ -244,10 +267,9 @@
           
           var Data = {
             'RoomID': RoomID,
-            'SubID': SubID,
             'STATUS': 'DeleteRoom'
           };
-          senddata(JSON.stringify(Data));
+          senddata(JSON.stringify(Data),0);
         }
       })
     }
@@ -263,8 +285,14 @@
       })
     }
 
-    function senddata(Data) {
+    function senddata(Data,Img) {
+      console.log(Data);
+      console.log(Img);
       var form_data = new FormData();
+      if (Img != 0) {
+        var FileData = $(Img).prop("files")[0];
+        form_data.append("file", FileData);
+      }
       form_data.append("DATA", Data);
       var URL = '../process/dorm_room.php';
       $.ajax({
@@ -287,6 +315,8 @@
               var imagenUrl = "../img/dorm/"+temp['Picture'];
               var drEvent = $('#new_dorm_img').dropify({});
               drEvent = drEvent.data('dropify');
+              drEvent.resetPreview();
+              drEvent.clearElement();
               drEvent.settings.defaultFile = imagenUrl;
               drEvent.destroy();
               drEvent.init();
@@ -305,7 +335,7 @@
                 Picture = "Default.png";
               }
 
-              $("#show_dorm_img").attr("src","../img/Dorm/" + Picture);
+              $("#show_dorm_img").attr("src","../img/dorm/" + Picture);
             }
             else if(temp["form"] == 'LoadFloor'){
               $("#floor").show();
@@ -338,7 +368,7 @@
                 //     Str += "<td class='py-1 px-2'><button onclick='ShowEditRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-warning'><i class='fas fa-edit'></i></button></td>";
                 //     Str += "<td class='py-1 px-2'><button onclick='DeleteRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-block btn-outline-danger'><i class='fas fa-trash-alt'></i></button></td></tr>";
                 
-                var Str = "<div class='col-xl-2 col-lg-3 col-md-4 col-sm-6 px-2 mb-3'><button onclick='' class='btn btn-outline-warning btn-block shadow'>";
+                var Str = "<div class='col-xl-2 col-lg-3 col-md-4 col-sm-6 px-2 mb-3'><button onclick='ViewRoom(\""+temp[i]['RoomID']+"\")' class='btn btn-outline-warning btn-block shadow'>";
                     Str += "<div class='col-12'><img class='img_list_room' src='../img/dorm/room/"+temp[i]['Picture']+"'></div>";
                     Str += "<div class='col-12'><div class='list-head'>"+temp[i]['RoomID']+"</div><div class='list-"+Status_class+"'>"+Status_text+"</div></div></button></div>";
 
@@ -352,26 +382,46 @@
                 }
               }
               //table = $('#dataTable').DataTable(); // สร้างคุณสมบัติใหม่
-            
+              
+            }
+            else if(temp["form"] == 'EditDorm'){
+              $("#md_edit_dorm").modal("hide");
+              LoadDorm();
             }
             else if(temp["form"] == 'DeleteDorm'){
               window.location.href='dorm.php';              
             }
-            else if(temp["form"] == 'ShowEditRoom'){
+            else if(temp["form"] == 'ViewRoom'){
+              var imagenUrl = "../img/dorm/room/"+temp['Picture'];
+              var drEvent = $('#new_img').dropify({});
+              drEvent = drEvent.data('dropify');
+              drEvent.resetPreview();
+              drEvent.clearElement();
+              drEvent.settings.defaultFile = imagenUrl;
+              drEvent.destroy();
+              drEvent.init();
+              
               var SubID = temp['RoomID'].substring(4);
               $("#real_id").val(temp['RoomID']);
               $("#new_id").val(SubID);
-              $("#new_name").val(temp['Name']);
-              $("#new_type").val(temp['Type']);
               $("#new_detail").val(temp['Detail']);
+              $('#room_status').val(temp['Status']).change();
+              $("#room_update").val(temp['Date']);
 
-              CallModal('EditRoom');
+              CallModal('ViewRoom');
+            }
+            else if(temp["form"] == 'AddRoom'){
+              $("#md_room").modal("hide");
+              LoadFloor();
+              LoadRoom();              
             }
             else if(temp["form"] == 'EditRoom'){
+              $("#md_room").modal("hide");
               LoadFloor();
               LoadRoom();              
             }
             else if(temp["form"] == 'DeleteRoom'){
+              $("#md_room").modal("hide");
               LoadFloor();
               LoadRoom();              
             }
@@ -399,17 +449,20 @@
               Type = "info";
               AlertError(Title,Text,Type);
             }
+            else if(temp["form"] == 'EditDorm'){
+              Text = "แก้ไขข้อมูลหอพัก '"+temp['DormID']+"' เกิดปัญหา";
+              AlertError(Title,Text,Type);
+            }
             else if(temp["form"] == 'DeleteDorm'){
               Text = "การลบหอพัก '"+temp['DormID']+"' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
-            else if(temp["form"] == 'AddRoom'){
-              Text = "การเพิ่มห้องพัก '"+temp['RoomID']+"' เกิดปัญหา";
+            else if(temp["form"] == 'ViewRoom'){
+              Text = "เรียกดูข้อมูลหอพัก '"+temp['RoomID']+"' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
-            else if(temp["form"] == 'ShowEditRoom'){
-              var SubID = temp['RoomID'].substring(4);
-              Text = "เรียกดูข้อมูลห้องพัก '"+SubID+"' เกิดปัญหา";
+            else if(temp["form"] == 'AddRoom'){
+              Text = "การเพิ่มห้องพัก '"+temp['RoomID']+"' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'EditRoom'){
@@ -417,7 +470,8 @@
               AlertError(Title,Text,Type);
             }
             else if(temp["form"] == 'DeleteRoom'){
-              Text = "การลบห้องพัก '"+temp['SubID']+"' เกิดปัญหา";
+              var SubID = temp['RoomID'].substring(4);
+              Text = "การลบห้องพัก '"+SubID+"' เกิดปัญหา";
               AlertError(Title,Text,Type);
             }
 
@@ -601,10 +655,19 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title"><i class="fas fa-plus mr-2"></i><label id="md_add_edit_head"></h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
+          <h5 class="modal-title w-100 d-flex">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-plus mr-2"></i>
+              <label id="md_view_add_edit_head" class="m-0"></label>
+            </div>
+            <div id="group_edit_del" class="ml-auto">
+              <button onclick="ShowEditRoom()" id="btn_edit_room" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+              <button onclick="DeleteRoom()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+          </button>
         </div>
 
         <div class="modal-body">
@@ -622,10 +685,24 @@
 
             <label>รายละเอียดห้อง</label>
             <textarea id="new_detail" class="form-control mb-3" rows="5" placeholder="กรอกรายละเอียดห้อง"></textarea>
+
+            <div id="group_status">
+              <label>สถานะห้อง</label>
+              <select class="form-control" id="room_status">
+                <option value="0">ว่าง</option>
+                <option value="1">จองแล้ว</option>
+                <option value="2">มีผู้พัก</option>
+              </select>
+            </div>
+
+            <div id="group_update">
+              <label class="mt-3">แก้ไขล่าสุด</label>
+              <input type="text" id="room_update" class="form-control form-control-user">
+            </div>
           </div>
         </div>
 
-        <div class="modal-footer">
+        <div id="md_room_foot" class="modal-footer">
           <button class="btn btn-secondary btn-user" type="button" data-dismiss="modal">ยกเลิก</button>
           <button onclick="AddRoom()" id="btn_ok_add" class="btn btn-success btn-user">เพิ่ม</button>
           <button onclick="EditRoom()" id="btn_ok_edit" class="btn btn-warning btn-user">แก้ไข</button>
