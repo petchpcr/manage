@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>ข้อมูลห้องในอาคาร</title>
 
   <!-- CSS Script-->
   <?php require_once 'script_css.php';?>

@@ -3,7 +3,7 @@
 
     $cfHost = "localhost";
     $cfUser = "root";
-    $cfPassword = "A$192dijd";
+    $cfPassword = "";
     $cfDatabase = "chomthong";
 
     /* connection mysql */
