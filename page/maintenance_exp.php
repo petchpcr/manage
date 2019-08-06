@@ -43,18 +43,20 @@
             </div>
           </div>
           <h1 class="text-center h3 mb-4">จัดการข้อมูลค่าใช้จ่ายการแจ้งซ่อม</h1>
-              
+          
+          <div class="col-12 p-0 mb-4">
+            <div class="input-group">
+              <input type="text" id="" class="form-control"  placeholder="ระบุคำที่ต้องการค้นหา">
+              <div class="input-group-append">
+                <button class="btn btn-info" type="button"><i class="fas fa-search mr-2"></i>ค้นหา</button>
+              </div>
+            </div>
+          </div>
+          
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3 text-right">
-              <div class="row">
-                <div class="col-6 text-left d-flex align-items-center">
-                  <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>ตารางข้อมูลค่าใช้จ่ายการแจ้งซ่อม</h6>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-outline-warning"><i class="fas fa-plus mr-2"></i>Add</button>
-                </div>
-              </div>
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-table mr-2"></i>ตารางข้อมูลค่าใช้จ่ายการแจ้งซ่อม</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -71,275 +73,108 @@
                       <th>แก้ไข</th>
                       <th>ลบ</th>
                     </tr>
-                    </thead>
-                  <tfoot>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                  </tfoot>
+                  </thead>
                   <tbody>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
-                    </tr>
-                    <tr>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th>11111111111111</th>
-                      <th><center><i class="fas fa-edit"></i></center></th>
-                      <th><center><i class="fas fa-trash-alt"></i></center></th>
+                      <td>ME0001</td>
+                      <td>MT0001</td>
+                      <td>ประตู</td>
+                      <td>1,100</td>
+                      <td>200</td>
+                      <td>1,300</td>
+                      <td>2018-12-26 14:00:00</td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button></td>
+                      <td class="py-1 px-2"><button class="btn btn-block btn-outline-danger"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
-              <div class="card-body text-right">
-                <div class="row">
-                  <div class="col-lg-none col-sm-12 mb-2">
-                      <button type="button" class="btn btn-outline-warning mr-4"><i class="fas fa-print mr-2"></i>ออกรายงานสถิติค่าใช้จ่ายการแจ้งซ่อม</button>
-                  </div>
+            <div class="card-body text-right">
+              <div class="row">
+                <div class="col-lg-none col-sm-12 mb-2">
+                    <button type="button" class="btn btn-outline-warning mr-4"><i class="fas fa-print mr-2"></i>ออกรายงานสถิติค่าใช้จ่ายการแจ้งซ่อม</button>
                 </div>
               </div>
+            </div>
 
           </div>
         </div>
@@ -365,6 +200,12 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
+  <div class="fix-btn-mtn">
+    <button onclick="" type="button" class="btn btn-block btn-success p-2">
+      <i class="fas fa-plus mr-1"></i>ค่าใช้จ่าย
+    </button>
+  </div>
+
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
