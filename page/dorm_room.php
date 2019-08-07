@@ -1,5 +1,5 @@
 <?php
-    $DormID = $_GET['DormID'];
+   // $DormID = $_GET['DormID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
